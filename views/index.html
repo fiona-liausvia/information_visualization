@@ -38,7 +38,8 @@
 			<select id="order">
 			  <!--<option value="name">by Name</option>-->
 			  <!--<option value="count">by Frequency</option>-->
-			  <option value="group">by Cluster</option>
+			  <option value="group">by Cluster and Relatedness Score</option>
+			  <option value="count">by Total Relatedness Score</option>
 			</select>
 		</p>
 	</div>
@@ -71,6 +72,7 @@
 		  nodes.forEach(function(node, i) {
 		   node.index = i;
 		   node.count = 0;
+		   node.count_total = 0;
 		   matrix[i] = d3.range(n).map(function(j) { return {x: j, y: i, z: 0}; });
 		  });
 
@@ -82,9 +84,12 @@
 		    //matrix[link.target][link.target].z += link.value;
 
 		    // only if link.source and link.target are in the same group
+	    	nodes[link.source].count_total += link.value;
+	    	nodes[link.target].count_total += link.value;
+
 		    if (nodes[link.source].group == nodes[link.target].group) {
 		    	nodes[link.source].count += link.value;
-		    	//nodes[link.target].count += link.value;
+		    	nodes[link.target].count += link.value;
 			}
 		  });
 
@@ -103,14 +108,14 @@
 		  // Precompute the orders.
 		  var orders = {
 		    //name: d3.range(n).sort(function(a, b) { return d3.ascending(nodes[a].name, nodes[b].name); }),
-		    //count: d3.range(n).sort(function(a, b) { return nodes[b].count - nodes[a].count; }),
+		    count: d3.range(n).sort(function(a, b) { return nodes[b].count_total - nodes[a].count_total; }),
 		    //group: d3.range(n)//.sort(function(a, b) { return nodes[b].group - nodes[a].group; })
 		    group: d3.range(n).sort(function(a, b) { 
 		    	if (nodes[b].group != nodes[a].group) {
 		    		return nodes[b].group - nodes[a].group
 		    	}
 		    	else {
-		    		return (nodes[b].count - nodes[a].count) * 100
+		    		return (nodes[b].count - nodes[a].count)
 		    	}
 		    })
 		  };
