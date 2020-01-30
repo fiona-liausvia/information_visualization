@@ -44,11 +44,10 @@
 	</div>
 
 	<script>
+
 		var margin = {top: 80, right: 0, bottom: 10, left: 80},
 		    width = 1000,
-		    height = 1000;
-
-		console.log(d3.scale)
+		    height = 1000;		
 
 		var x = d3.scale.ordinal().rangeBands([0, width]),
 		    z = d3.scale.linear().domain([0, 1]).range([0, 10]), //.clamp(true),
@@ -78,13 +77,15 @@
 		  //Convert links to matrix; count character occurrences.
 		  comatrix.links.forEach(function(link) {
 		    matrix[link.source][link.target].z = link.value;
-		    matrix[link.target][link.source].z += link.value;
-		    matrix[link.source][link.source].z += link.value;
-		    matrix[link.target][link.target].z += link.value;
+		    //matrix[link.target][link.source].z += link.value;
+		    //matrix[link.source][link.source].z += link.value;
+		    //matrix[link.target][link.target].z += link.value;
 
 		    // only if link.source and link.target are in the same group
-		    //nodes[link.source].count += link.value;
-		    //nodes[link.target].count += link.value;
+		    if (nodes[link.source].group == nodes[link.target].group) {
+		    	nodes[link.source].count += link.value;
+		    	//nodes[link.target].count += link.value;
+			}
 		  });
 
 /*		  for (var i = 0; i < nodes.length; i++) {
@@ -103,7 +104,15 @@
 		  var orders = {
 		    //name: d3.range(n).sort(function(a, b) { return d3.ascending(nodes[a].name, nodes[b].name); }),
 		    //count: d3.range(n).sort(function(a, b) { return nodes[b].count - nodes[a].count; }),
-		    group: d3.range(n)//.sort(function(a, b) { return nodes[b].group - nodes[a].group; })
+		    //group: d3.range(n)//.sort(function(a, b) { return nodes[b].group - nodes[a].group; })
+		    group: d3.range(n).sort(function(a, b) { 
+		    	if (nodes[b].group != nodes[a].group) {
+		    		return nodes[b].group - nodes[a].group
+		    	}
+		    	else {
+		    		return (nodes[b].count - nodes[a].count) * 100
+		    	}
+		    })
 		  };
 
 		  // The default sort order.
@@ -164,7 +173,7 @@
 		  }
 
 		  function mouseover(p) {
-		  	console.log(p)
+		  	//console.log(p)
 		    d3.selectAll(".row text").classed("active", function(d, i) { 
 		    	return i == p.y; 
 		    });
