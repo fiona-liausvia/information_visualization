@@ -1,0 +1,1024 @@
+{
+  "children": [
+    {
+      "children": [
+        {
+          "name": "UbiComp",
+          "size": 54
+        },
+        {
+          "name": "CAV",
+          "size": 67
+        },
+        {
+          "name": "SODA",
+          "size": 184
+        },
+        {
+          "name": "ICDE",
+          "size": 268
+        },
+        {
+          "name": "MICRO",
+          "size": 80
+        },
+        {
+          "name": "HPCA",
+          "size": 56
+        },
+        {
+          "name": "WWW",
+          "size": 390
+        },
+        {
+          "name": "FAST",
+          "size": 26
+        },
+        {
+          "name": "LICS",
+          "size": 62
+        },
+        {
+          "name": "FOCS",
+          "size": 92
+        },
+        {
+          "name": "MobiCom",
+          "size": 112
+        },
+        {
+          "name": "USENIX",
+          "size": 191
+        },
+        {
+          "name": "SIGCOMM",
+          "size": 32
+        },
+        {
+          "name": "SIGKDD",
+          "size": 374
+        },
+        {
+          "name": "SIGMOD",
+          "size": 179
+        },
+        {
+          "name": "ACM MM",
+          "size": 371
+        },
+        {
+          "name": "FSE/ESEC",
+          "size": 150
+        },
+        {
+          "name": "AAAI",
+          "size": 1343
+        },
+        {
+          "name": "CHI",
+          "size": 702
+        },
+        {
+          "name": "NSDI",
+          "size": 49
+        },
+        {
+          "name": "PLDI",
+          "size": 76
+        },
+        {
+          "name": "SOSP",
+          "size": 38
+        },
+        {
+          "name": "INFOCOM",
+          "size": 288
+        },
+        {
+          "name": "IEEE VIS",
+          "size": 59
+        },
+        {
+          "name": "EUROCRYPT",
+          "size": 76
+        },
+        {
+          "name": "ISSTA",
+          "size": 53
+        },
+        {
+          "name": "CVPR",
+          "size": 1294
+        },
+        {
+          "name": "SIGIR",
+          "size": 262
+        },
+        {
+          "name": "NeurIPS",
+          "size": 1427
+        },
+        {
+          "name": "ASE",
+          "size": 154
+        },
+        {
+          "name": "S&P",
+          "size": 84
+        },
+        {
+          "name": "STOC",
+          "size": 113
+        },
+        {
+          "name": "ICSE",
+          "size": 109
+        },
+        {
+          "name": "SC",
+          "size": 89
+        },
+        {
+          "name": "CRYPTO",
+          "size": 81
+        },
+        {
+          "name": "PPoPP",
+          "size": 60
+        },
+        {
+          "name": "ISCA",
+          "size": 62
+        },
+        {
+          "name": "ICML",
+          "size": 774
+        },
+        {
+          "name": "IJCAI",
+          "size": 965
+        },
+        {
+          "name": "ASPLOS",
+          "size": 76
+        },
+        {
+          "name": "DAC",
+          "size": 240
+        },
+        {
+          "name": "VR",
+          "size": 471
+        },
+        {
+          "name": "ACL",
+          "size": 763
+        }
+      ],
+      "name": "A"
+    },
+    {
+      "children": [
+        {
+          "name": "LCTES",
+          "size": 22
+        },
+        {
+          "name": "IPSN",
+          "size": 51
+        },
+        {
+          "name": "PACT",
+          "size": 58
+        },
+        {
+          "name": "DSN",
+          "size": 54
+        },
+        {
+          "name": "CIKM",
+          "size": 394
+        },
+        {
+          "name": "ICRA",
+          "size": 1023
+        },
+        {
+          "name": "SenSys",
+          "size": 67
+        },
+        {
+          "name": "MobiHoc",
+          "size": 57
+        },
+        {
+          "name": "ICSOC",
+          "size": 42
+        },
+        {
+          "name": "ISWC",
+          "size": 74
+        },
+        {
+          "name": "RECOMB",
+          "size": 37
+        },
+        {
+          "name": "IUI",
+          "size": 74
+        },
+        {
+          "name": "FPGA",
+          "size": 94
+        },
+        {
+          "name": "ICCBR",
+          "size": 26
+        },
+        {
+          "name": "DATE",
+          "size": 329
+        },
+        {
+          "name": "ISMAR",
+          "size": 36
+        },
+        {
+          "name": "CGO",
+          "size": 33
+        },
+        {
+          "name": "TCC",
+          "size": 43
+        },
+        {
+          "name": "CSFW",
+          "size": 30
+        },
+        {
+          "name": "FM",
+          "size": 46
+        },
+        {
+          "name": "RE",
+          "size": 72
+        },
+        {
+          "name": "UAI",
+          "size": 118
+        },
+        {
+          "name": "ESA",
+          "size": 84
+        },
+        {
+          "name": "ICALP",
+          "size": 152
+        },
+        {
+          "name": "HSCC",
+          "size": 41
+        },
+        {
+          "name": "ICASSP",
+          "size": 1735
+        },
+        {
+          "name": "SANER",
+          "size": 74
+        },
+        {
+          "name": "ICPC",
+          "size": 43
+        },
+        {
+          "name": "SDM",
+          "size": 90
+        },
+        {
+          "name": "SoCG",
+          "size": 67
+        },
+        {
+          "name": "ICWS",
+          "size": 70
+        },
+        {
+          "name": "SECON",
+          "size": 83
+        },
+        {
+          "name": "NDSS",
+          "size": 90
+        },
+        {
+          "name": "SIGMETRICS",
+          "size": 50
+        },
+        {
+          "name": "IWQoS",
+          "size": 42
+        },
+        {
+          "name": "CAiSE",
+          "size": 42
+        },
+        {
+          "name": "PODS",
+          "size": 34
+        },
+        {
+          "name": "IPDPS",
+          "size": 106
+        },
+        {
+          "name": "ECOOP",
+          "size": 29
+        },
+        {
+          "name": "PERCOM",
+          "size": 37
+        },
+        {
+          "name": "CogSci",
+          "size": 925
+        },
+        {
+          "name": "DCC",
+          "size": 121
+        },
+        {
+          "name": "ASIACRYPT",
+          "size": 72
+        },
+        {
+          "name": "ICMR",
+          "size": 61
+        },
+        {
+          "name": "CIDR",
+          "size": 50
+        },
+        {
+          "name": "CODES+ISSS",
+          "size": 21
+        },
+        {
+          "name": "CADE/IJCAR",
+          "size": 34
+        },
+        {
+          "name": "CoNEXT",
+          "size": 32
+        },
+        {
+          "name": "MobiSys",
+          "size": 142
+        },
+        {
+          "name": "DASFAA",
+          "size": 92
+        },
+        {
+          "name": "ICS",
+          "size": 45
+        },
+        {
+          "name": "SAT",
+          "size": 28
+        },
+        {
+          "name": "PKC",
+          "size": 42
+        },
+        {
+          "name": "RAID",
+          "size": 37
+        },
+        {
+          "name": "SAS",
+          "size": 22
+        },
+        {
+          "name": "MobileHCI",
+          "size": 80
+        },
+        {
+          "name": "ICME",
+          "size": 313
+        },
+        {
+          "name": "NOSSDAV",
+          "size": 12
+        },
+        {
+          "name": "PODC",
+          "size": 78
+        },
+        {
+          "name": "EuroVis",
+          "size": 22
+        },
+        {
+          "name": "ITS",
+          "size": 52
+        },
+        {
+          "name": "ICDT",
+          "size": 25
+        },
+        {
+          "name": "RTAS",
+          "size": 30
+        },
+        {
+          "name": "ICDCS",
+          "size": 211
+        },
+        {
+          "name": "ICNP",
+          "size": 81
+        },
+        {
+          "name": "MoDELS",
+          "size": 30
+        },
+        {
+          "name": "UIST",
+          "size": 95
+        },
+        {
+          "name": "ESEM",
+          "size": 48
+        },
+        {
+          "name": "CP",
+          "size": 44
+        },
+        {
+          "name": "EMNLP",
+          "size": 732
+        },
+        {
+          "name": "MSST",
+          "size": 28
+        },
+        {
+          "name": "COLT",
+          "size": 127
+        },
+        {
+          "name": "CONCUR",
+          "size": 42
+        },
+        {
+          "name": "ESORICS",
+          "size": 67
+        },
+        {
+          "name": "ICPP",
+          "size": 106
+        },
+        {
+          "name": "HPDC",
+          "size": 30
+        },
+        {
+          "name": "VMCAI",
+          "size": 27
+        },
+        {
+          "name": "SI3D",
+          "size": 16
+        },
+        {
+          "name": "ICAPS",
+          "size": 91
+        },
+        {
+          "name": "SCA",
+          "size": 10
+        },
+        {
+          "name": "WSDM",
+          "size": 121
+        },
+        {
+          "name": "EuroSys",
+          "size": 45
+        },
+        {
+          "name": "ICSME",
+          "size": 95
+        },
+        {
+          "name": "CCC",
+          "size": 33
+        },
+        {
+          "name": "ACSAC",
+          "size": 60
+        },
+        {
+          "name": "Middleware",
+          "size": 25
+        },
+        {
+          "name": "CLUSTER",
+          "size": 58
+        },
+        {
+          "name": "SPAA",
+          "size": 46
+        },
+        {
+          "name": "HotOS",
+          "size": 30
+        },
+        {
+          "name": "EDBT",
+          "size": 96
+        },
+        {
+          "name": "IMC",
+          "size": 39
+        },
+        {
+          "name": "AAMAS",
+          "size": 438
+        },
+        {
+          "name": "VEE",
+          "size": 16
+        }
+      ],
+      "name": "B"
+    },
+    {
+      "children": [
+        {
+          "name": "IM",
+          "size": 145
+        },
+        {
+          "name": "ICIP",
+          "size": 956
+        },
+        {
+          "name": "ISAAC",
+          "size": 65
+        },
+        {
+          "name": "NOCS",
+          "size": 23
+        },
+        {
+          "name": "WISE",
+          "size": 50
+        },
+        {
+          "name": "NPC",
+          "size": 37
+        },
+        {
+          "name": "AsiaCCS",
+          "size": 207
+        },
+        {
+          "name": "FC",
+          "size": 39
+        },
+        {
+          "name": "ICFEM",
+          "size": 37
+        },
+        {
+          "name": "PAM",
+          "size": 20
+        },
+        {
+          "name": "PEPM",
+          "size": 9
+        },
+        {
+          "name": "IPCO",
+          "size": 33
+        },
+        {
+          "name": "MASCOTS",
+          "size": 39
+        },
+        {
+          "name": "SEC",
+          "size": 26
+        },
+        {
+          "name": "SAC",
+          "size": 28
+        },
+        {
+          "name": "SEKE",
+          "size": 140
+        },
+        {
+          "name": "WASA",
+          "size": 54
+        },
+        {
+          "name": "Networking",
+          "size": 32
+        },
+        {
+          "name": "ICTAC",
+          "size": 22
+        },
+        {
+          "name": "IEEECLOUD",
+          "size": 84
+        },
+        {
+          "name": "DEXA",
+          "size": 66
+        },
+        {
+          "name": "APSEC",
+          "size": 65
+        },
+        {
+          "name": "ETS",
+          "size": 41
+        },
+        {
+          "name": "ICC",
+          "size": 1009
+        },
+        {
+          "name": "ASP-DAC",
+          "size": 130
+        },
+        {
+          "name": "ALT",
+          "size": 38
+        },
+        {
+          "name": "HPCC",
+          "size": 382
+        },
+        {
+          "name": "SPIN",
+          "size": 14
+        },
+        {
+          "name": "ATS",
+          "size": 28
+        },
+        {
+          "name": "CGI",
+          "size": 58
+        },
+        {
+          "name": "ATVA",
+          "size": 31
+        },
+        {
+          "name": "APLAS",
+          "size": 24
+        },
+        {
+          "name": "KSEM",
+          "size": 111
+        },
+        {
+          "name": "ER",
+          "size": 46
+        },
+        {
+          "name": "ICST",
+          "size": 53
+        },
+        {
+          "name": "NAACL",
+          "size": 501
+        },
+        {
+          "name": "ACML",
+          "size": 79
+        },
+        {
+          "name": "ACNS",
+          "size": 29
+        },
+        {
+          "name": "ICMI",
+          "size": 87
+        },
+        {
+          "name": "FPL",
+          "size": 71
+        },
+        {
+          "name": "ISPASS",
+          "size": 34
+        },
+        {
+          "name": "Euro-Par",
+          "size": 36
+        },
+        {
+          "name": "PRICAI",
+          "size": 174
+        },
+        {
+          "name": "ASSETS",
+          "size": 111
+        },
+        {
+          "name": "MFCS",
+          "size": 84
+        },
+        {
+          "name": "IDC",
+          "size": 104
+        },
+        {
+          "name": "ESWC",
+          "size": 39
+        },
+        {
+          "name": "ISPD",
+          "size": 39
+        },
+        {
+          "name": "COMPSAC",
+          "size": 267
+        },
+        {
+          "name": "REFSQ",
+          "size": 22
+        },
+        {
+          "name": "MDM",
+          "size": 104
+        },
+        {
+          "name": "PacificVis",
+          "size": 32
+        },
+        {
+          "name": "3DV",
+          "size": 79
+        },
+        {
+          "name": "SYSTOR",
+          "size": 34
+        },
+        {
+          "name": "WoWMoM",
+          "size": 76
+        },
+        {
+          "name": "CSCWD",
+          "size": 91
+        },
+        {
+          "name": "SACMAT",
+          "size": 28
+        },
+        {
+          "name": "WCNC",
+          "size": 509
+        },
+        {
+          "name": "FCCM",
+          "size": 70
+        },
+        {
+          "name": "SMC",
+          "size": 716
+        },
+        {
+          "name": "GECCO",
+          "size": 176
+        },
+        {
+          "name": "ISC",
+          "size": 23
+        },
+        {
+          "name": "GI",
+          "size": 28
+        },
+        {
+          "name": "DIS",
+          "size": 125
+        },
+        {
+          "name": "ISBRA",
+          "size": 22
+        },
+        {
+          "name": "ACISP",
+          "size": 40
+        },
+        {
+          "name": "DIMVA",
+          "size": 23
+        },
+        {
+          "name": "ICSR",
+          "size": 16
+        },
+        {
+          "name": "SOUPS",
+          "size": 27
+        },
+        {
+          "name": "CCGRID",
+          "size": 81
+        },
+        {
+          "name": "ISLPED",
+          "size": 57
+        },
+        {
+          "name": "STACS",
+          "size": 60
+        },
+        {
+          "name": "APNOMS",
+          "size": 113
+        },
+        {
+          "name": "CF",
+          "size": 70
+        },
+        {
+          "name": "HAPTICS",
+          "size": 106
+        },
+        {
+          "name": "ICCCN",
+          "size": 125
+        },
+        {
+          "name": "HotNets",
+          "size": 20
+        },
+        {
+          "name": "TrustCom",
+          "size": 105
+        },
+        {
+          "name": "ICWE",
+          "size": 50
+        },
+        {
+          "name": "MSWiM",
+          "size": 43
+        },
+        {
+          "name": "ISCAS",
+          "size": 724
+        },
+        {
+          "name": "ECIR",
+          "size": 119
+        },
+        {
+          "name": "FG",
+          "size": 119
+        },
+        {
+          "name": "ASAP",
+          "size": 55
+        },
+        {
+          "name": "GLSVLSI",
+          "size": 105
+        },
+        {
+          "name": "ICSSP",
+          "size": 21
+        },
+        {
+          "name": "RTA",
+          "size": 35
+        },
+        {
+          "name": "MMM",
+          "size": 119
+        },
+        {
+          "name": "FORTE",
+          "size": 18
+        },
+        {
+          "name": "IJCNN",
+          "size": 801
+        },
+        {
+          "name": "CT-RSA",
+          "size": 28
+        },
+        {
+          "name": "INTERACT",
+          "size": 213
+        },
+        {
+          "name": "VTS",
+          "size": 55
+        },
+        {
+          "name": "FMCAD",
+          "size": 33
+        },
+        {
+          "name": "NLPCC",
+          "size": 142
+        },
+        {
+          "name": "PAKDD",
+          "size": 137
+        },
+        {
+          "name": "TOOLS",
+          "size": 34
+        },
+        {
+          "name": "ICANN",
+          "size": 241
+        },
+        {
+          "name": "IH&MMSec",
+          "size": 33
+        },
+        {
+          "name": "SSTD",
+          "size": 31
+        },
+        {
+          "name": "EASE",
+          "size": 43
+        },
+        {
+          "name": "MSR",
+          "size": 79
+        },
+        {
+          "name": "FSTTCS",
+          "size": 52
+        },
+        {
+          "name": "CASA",
+          "size": 18
+        },
+        {
+          "name": "SCAM",
+          "size": 28
+        },
+        {
+          "name": "SSDBM",
+          "size": 27
+        },
+        {
+          "name": "APWeb",
+          "size": 65
+        },
+        {
+          "name": "TASE",
+          "size": 36
+        },
+        {
+          "name": "COSIT",
+          "size": 29
+        },
+        {
+          "name": "ICECCS",
+          "size": 27
+        },
+        {
+          "name": "AISTATS",
+          "size": 360
+        },
+        {
+          "name": "WiSec",
+          "size": 60
+        },
+        {
+          "name": "ANCS",
+          "size": 29
+        },
+        {
+          "name": "ICONIP",
+          "size": 340
+        },
+        {
+          "name": "SCC",
+          "size": 36
+        }
+      ],
+      "name": "C"
+    }
+  ],
+  "name": "conferences"
+}
