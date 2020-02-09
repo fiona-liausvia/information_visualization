@@ -69,25 +69,25 @@ module.exports = function(app)
 
     app.get('/vis2',function(req,res){
     	res.render('vis2.html', { 
-	    	title: "Visualization 2" 
+	    	title: "Visualization 2: Conferences by Rank and Number of Papers Published" 
 	    })
     });
 
     app.get('/vis3',function(req,res){
     	res.render('vis3.html', { 
-	    	title: "Visualization 3" 
+	    	title: "Visualization 3: Stack Overflow Tag Network" 
 	    })
     });
 
     app.get('/vis4',function(req,res){
     	res.render('vis4.html', { 
-	    	title: "Visualization 4" 
+	    	title: "Visualization 4: Average Singapore PSI (Feb 2016 to Nov 2019)" 
 	    })
     });
 
     app.get('/vis5',function(req,res){
     	res.render('vis5.html', { 
-	    	title: "Visualization 5" 
+	    	title: "Visualization 5: Coronavirus nCov-2019" 
 	    })
     });
 

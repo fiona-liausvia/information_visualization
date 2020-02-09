@@ -5,6 +5,7 @@ var bodyParser 	= require("body-parser");
 var http 				= require("http");
 var path 				= require('path')
 var fs 					= require('fs');    
+var csv 				= require('csv-parser');
 
 app.use(express.static('public'))
 app.use(express.static('data'))
@@ -199,12 +200,44 @@ function generate_data_visual_2(year) {
 	}
 }
 
-var server     =    app.listen(3000,function(){
-		console.log("Express is running on port 3000");
+// #################################### DATA VISUAL 3 ######################################
 
-		// CCF2019
-		//generate_data_visual_1();
-		//generate_data_visual_2('2018');
-		//generate_data_visual_2('2019');
+function generate_data_visual_3() {
+
+	json_output = {
+		"nodes": [],
+		"links": []
+	}
+
+	fs.createReadStream('data/stack_network_links.csv')
+	  .pipe(csv())
+	  .on('data', (row) => {
+	  	json_output["links"].push(row)
+	  })
+	  .on('end', () => {
+
+		fs.createReadStream('data/stack_network_nodes.csv')
+		  .pipe(csv())
+		  .on('data', (row) => {
+		  	json_output["nodes"].push({"id": row["name"], "group": row["group"]})
+		  })
+		  .on('end', () => {
+
+		    var data_json = JSON.stringify(json_output);
+			fs.writeFileSync('data/stack_overflow.json', data_json);
+		  });
+	  });
+
+
+}
+
+var server     =    app.listen(3000,function(){
+	console.log("Express is running on port 3000");
+
+	// CCF2019
+	//generate_data_visual_1();
+	//generate_data_visual_2('2018');
+	//generate_data_visual_2('2019');
+	generate_data_visual_3();
 
 });
