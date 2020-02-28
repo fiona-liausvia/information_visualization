@@ -219,7 +219,7 @@ function generate_data_visual_3() {
 		fs.createReadStream('data/stack_network_nodes.csv')
 		  .pipe(csv())
 		  .on('data', (row) => {
-		  	json_output["nodes"].push({"id": row["name"], "group": row["group"]})
+		  	json_output["nodes"].push({"id": row["name"], "group": row["group"], "size": row["nodesize"]})
 		  })
 		  .on('end', () => {
 

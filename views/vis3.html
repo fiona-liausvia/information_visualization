@@ -3,8 +3,8 @@
 
 	<style>
 		.links line {
-		  stroke: #999;
-		  stroke-opacity: 0.6;
+		  stroke: #000;
+		  stroke-opacity: 0.3;
 		}
 
 		.nodes circle {
@@ -61,7 +61,7 @@
 		    .selectAll("line")
 		    .data(graph.links)
 		    .enter().append("line")
-		      .attr("stroke-width", function(d) { return Math.sqrt(d.value / 10.0); });
+		      .attr("stroke-width", function(d) { return Math.sqrt(d.value) / 2.0; });
 
 		  var node = svg.append("g")
 		      .attr("class", "nodes")
@@ -70,7 +70,7 @@
 		    .enter().append("g")
 		    
 		  var circles = node.append("circle")
-		      .attr("r", 5)
+		      .attr("r", function(d) { return Math.log(d.size) * 2; })
 		      .attr("fill", function(d) { return color(d.group); })
 		      .call(d3.drag()
 		          .on("start", dragstarted)
