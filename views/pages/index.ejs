@@ -1,112 +1,209 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include ../partials/header.ejs %>
+  <style>
+    .background {
+      fill: #eee;
+    }
+
+    line {
+      stroke: #fff;
+    }
+
+    text.active {
+      fill: blue;
+    }
+
+  </style>
 </head>
 
+<script src="//d3js.org/d3.v2.min.js" charset="utf-8"></script>
+
+<% include ../partials/header.ejs %>
 <% include ../partials/nav.ejs %>
 
-          <!-- end #header -->
-          <div id="menu-wrapper">
-            <div id="menu">
-              <ul>
-                <li class="current_page_item"><a href="#">Homepage</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Photos</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Links</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- end #menu -->
-          <div id="banner"><img src="images/img05.jpg" width="940" height="300" alt="" /></div>
-          <div id="content">
-            <div class="post">
-              <h2 class="title"><a href="#">Welcome to ExtremeSurfing</a></h2>
-              <p class="meta">Posted by <a href="#">Someone</a> on February 25, 2012
-                &nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink">Full article</a></p>
-              <div class="entry">
-                <p><img src="images/img06.jpg" width="628" height="250" alt="" class="border" />This is <strong>ExtremeSurfing </strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.  The picture in this template is from <a href="http://pdohoto.org">PDPhoto.org</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you’re pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :)</p>
-                <p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum ipsum. Proin imperdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem.</p>
-              </div>
-            </div>
-            <div class="post">
-              <h2 class="title"><a href="#">Lorem ipsum sed aliquam</a></h2>
-              <p class="meta">Posted by <a href="#">Someone</a> on February 24, 2012
-                &nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink">Full article</a></p>
-              <div class="entry">
-                <p><img src="images/img07.jpg" width="628" height="250" alt="" class="border" />Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus <a href="#">dapibus semper urna</a>. Pellentesque ornare, consectetuer nisl felis ac diam. Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. Mauris vitae nisl nec metus.</p>
-              </div>
-            </div>
-            <div class="post">
-              <h2 class="title"><a href="#">Phasellus pellentesque turpis </a></h2>
-              <p class="meta">Posted by <a href="#">Someone</a> on February 8, 2012
-                &nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink">Full article</a></p>
-              <div class="entry">
-                <p><img src="images/img06.jpg" width="628" height="250" alt="" class="border" />Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Pellentesque ornare, orci in consectetuer hendrerit, urna elit eleifend nunc. Donec ipsum. Proin imperdiet est. Pellentesque ornare, orci in consectetuer , urna elit eleifend nunc.</p>
-              </div>
-            </div>
-            <div style="clear: both;">&nbsp;</div>
-          </div>
-          <!-- end #content -->
-          <div id="sidebar">
-            <ul>
-              <li>
-                <h2>Aliquam tempus</h2>
-                <p>Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper consectetuer hendrerit.</p>
-              </li>
-              <li>
-                <h2>Categories</h2>
-                <ul>
-                  <li><a href="#">Aliquam libero</a></li>
-                  <li><a href="#">Consectetuer adipiscing elit</a></li>
-                  <li><a href="#">Metus aliquam pellentesque</a></li>
-                  <li><a href="#">Suspendisse iaculis mauris</a></li>
-                  <li><a href="#">Urnanet non molestie semper</a></li>
-                  <li><a href="#">Proin gravida orci porttitor</a></li>
-                </ul>
-              </li>
-              <li>
-                <h2>Blogroll</h2>
-                <ul>
-                  <li><a href="#">Aliquam libero</a></li>
-                  <li><a href="#">Consectetuer adipiscing elit</a></li>
-                  <li><a href="#">Metus aliquam pellentesque</a></li>
-                  <li><a href="#">Suspendisse iaculis mauris</a></li>
-                  <li><a href="#">Urnanet non molestie semper</a></li>
-                  <li><a href="#">Proin gravida orci porttitor</a></li>
-                </ul>
-              </li>
-              <li>
-                <h2>Archives</h2>
-                <ul>
-                  <li><a href="#">Aliquam libero</a></li>
-                  <li><a href="#">Consectetuer adipiscing elit</a></li>
-                  <li><a href="#">Metus aliquam pellentesque</a></li>
-                  <li><a href="#">Suspendisse iaculis mauris</a></li>
-                  <li><a href="#">Urnanet non molestie semper</a></li>
-                  <li><a href="#">Proin gravida orci porttitor</a></li>
-                </ul>
-              </li>
-              <li>
-                <h2>Consequat Amet</h2>
-                <ul>
-                  <li><a href="#">Aliquam libero</a></li>
-                  <li><a href="#">Consectetuer adipiscing elit</a></li>
-                  <li><a href="#">Metus aliquam pellentesque</a></li>
-                  <li><a href="#">Suspendisse iaculis mauris</a></li>
-                  <li><a href="#">Urnanet non molestie semper</a></li>
-                  <li><a href="#">Proin gravida orci porttitor</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <!-- end #sidebar -->
-        </div>
-        <div style="clear: both;">&nbsp;</div>
-      </div>
-    </div>
-  </div>
+<h3 align="center">How Similar are Computer Science Conferences with Each Other in 2019?</h3>
 
-<% include ../partials/footer.ejs %>
+<br>
+<p>
+Conferences generally have their predefined topic/theme which guide authors to submit their papers to relevant conference. But how similar are conferences which have the same topic? And how strong are the relationship between conferences which belongs to different topic?
+</p>
+<p>
+In order to answer this, we draw a co-occurrence matrix to show the relationship between all pairs of conferences. Due to space constraint, we only extracted rank-A conferences which is recommended by <a href="data/ccf2019_r4.csv">CCF List</a>.
+</p>
+<p>
+  Preprocessed dataset can be downloaded <a href="data/co_occurence_matrix.json">here</a>.
+</p>
+
+<div id="content">
+</div>
+
+<script>
+  var margin = {top: 120, right: 0, bottom: 40, left: 80},
+      width = 700,
+      height = 700;    
+
+  var x = d3.scale.ordinal().rangeBands([0, width]),
+      z = d3.scale.linear().domain([0, 1]).range([0, 10]), //.clamp(true),
+      //z = d3.scale.pow().exponent(2).domain([0, 11000]).range([0, 10000]),
+      //z = d3.scale.pow().domain([0, 10000]).range([0, 50]),
+      c = d3.scale.category20().domain(d3.range(10));
+
+  var svg = d3.select("#content").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .style("margin-left", margin.left + "px")
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  d3.json("data/co_occurence_matrix.json", function(comatrix) {
+    var matrix = [],
+        nodes = comatrix.nodes,
+        n = nodes.length;
+
+    //Compute index per node.
+    nodes.forEach(function(node, i) {
+     node.index = i;
+     node.count = 0;
+     node.count_total = 0;
+     matrix[i] = d3.range(n).map(function(j) { return {x: j, y: i, z: 0}; });
+    });
+
+    //Convert links to matrix; count character occurrences.
+    comatrix.links.forEach(function(link) {
+      matrix[link.source][link.target].z = link.value;
+      //matrix[link.target][link.source].z += link.value;
+      //matrix[link.source][link.source].z += link.value;
+      //matrix[link.target][link.target].z += link.value;
+
+      // only if link.source and link.target are in the same group
+      nodes[link.source].count_total += link.value;
+      nodes[link.target].count_total += link.value;
+
+      if (nodes[link.source].group == nodes[link.target].group) {
+        nodes[link.source].count += link.value;
+        nodes[link.target].count += link.value;
+    }
+    });
+
+    /*
+    for (var i = 0; i < nodes.length; i++) {
+      matrix[i] = []
+      for (var j = 0; j < nodes.length; j++) {
+        matrix[i].push({x: j, y: i, z: 0})
+      }
+    }
+
+    for (var i = 0; i < comatrix.links.length; i++) {
+      matrix[comatrix.links[i].source][comatrix.links[i].target].z = comatrix.links[i].value;
+    }*/
+
+    // Precompute the orders.
+    var orders = {
+      //name: d3.range(n).sort(function(a, b) { return d3.ascending(nodes[a].name, nodes[b].name); }),
+      count: d3.range(n).sort(function(a, b) { return nodes[b].count_total - nodes[a].count_total; }),
+      //group: d3.range(n)//.sort(function(a, b) { return nodes[b].group - nodes[a].group; })
+      group: d3.range(n).sort(function(a, b) { 
+        if (nodes[b].group != nodes[a].group) {
+          return nodes[b].group - nodes[a].group
+        }
+        else {
+          return (nodes[b].count - nodes[a].count)
+        }
+      })
+    };
+
+    // The default sort order.
+    x.domain(orders.group);
+
+    svg.append("rect")
+        .attr("class", "background")
+        .attr("width", width)
+        .attr("height", height);
+
+    var row = svg.selectAll(".row")
+        .data(matrix)
+      .enter().append("g")
+        .attr("class", "row")
+        .attr("transform", function(d, i) { return "translate(0," + x(i) + ")"; })
+        .each(row);
+
+    row.append("line")
+        .attr("x2", width);
+
+    row.append("text")
+        .attr("x", -6)
+        .attr("y", x.rangeBand() / 2)
+        .attr("dy", ".32em")
+        .attr("text-anchor", "end")
+        .text(function(d, i) { return nodes[i].name; });
+
+    var column = svg.selectAll(".column")
+        .data(matrix)
+      .enter().append("g")
+        .attr("class", "column")
+        .attr("transform", function(d, i) { return "translate(" + x(i) + ")rotate(-90)"; });
+
+    column.append("line")
+        .attr("x1", -width);
+
+    column.append("text")
+        .attr("x", 6)
+        .attr("y", x.rangeBand() / 2)
+        .attr("dy", ".32em")
+        .attr("text-anchor", "start")
+        .text(function(d, i) { return nodes[i].name; });
+
+    function row(row) {
+      var cell = d3.select(this).selectAll(".cell")
+          .data(row.filter(function(d) { return d.z; }))
+        .enter().append("rect")
+          .attr("class", "cell")
+          .attr("x", function(d) { return x(d.x); })
+          .attr("width", x.rangeBand())
+          .attr("height", x.rangeBand())
+          .style("fill-opacity", function(d) { 
+            return z(d.z); 
+          })
+          .style("fill", function(d) { return nodes[d.x].group == nodes[d.y].group ? c(nodes[d.x].group) : null; })
+          .on("mouseover", mouseover)
+          .on("mouseout", mouseout);
+    }
+
+    function mouseover(p) {
+      //console.log(p)
+      d3.selectAll(".row text").classed("active", function(d, i) { 
+        return i == p.y; 
+      });
+      d3.selectAll(".column text").classed("active", function(d, i) { 
+        return i == p.x; 
+      });
+    }
+
+    function mouseout() {
+      d3.selectAll("text").classed("active", false);
+    }
+
+    d3.select("#order").on("change", function() {
+      order(this.value);
+    });
+
+    function order(value) {
+      x.domain(orders[value]);
+
+      var t = svg.transition().duration(2500);
+
+      t.selectAll(".row")
+          .delay(function(d, i) { return x(i) * 4; })
+          .attr("transform", function(d, i) { return "translate(0," + x(i) + ")"; })
+        .selectAll(".cell")
+          .delay(function(d) { return x(d.x) * 4; })
+          .attr("x", function(d) { return x(d.x); });
+
+      t.selectAll(".column")
+          .delay(function(d, i) { return x(i) * 4; })
+          .attr("transform", function(d, i) { return "translate(" + x(i) + ")rotate(-90)"; });
+    }
+  });   
+</script>
+

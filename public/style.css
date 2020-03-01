@@ -15,6 +15,11 @@ body {
 	color: #181B20;
 }
 
+p {
+	margin-left: 60px;
+	margin-right: 60px;
+}
+
 h1, h2, h3 {
 	margin: 0;
 	padding: 0;

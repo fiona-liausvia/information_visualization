@@ -18,3 +18,14 @@ express()
   .get('/', (req, res) => res.render('pages/index'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
+app.get('/',function(req,res){
+	res.render('index.html', { 
+    	title: "Visualization 1: Co-occurence Matrix" 
+    })
+});
+
+app.get('/v2',function(req,res){
+	res.render('vis2.html', { 
+    	title: "Visualization 2: Conferences by Rank and Number of Papers Published" 
+    })
+});
