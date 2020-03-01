@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .links line {
+      stroke: #000;
+      stroke-opacity: 0.3;
+    }
+
+    .nodes circle {
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
+
+    text {
+      font-family: sans-serif;
+      font-size: 10px;
+    }
+  </style>
+</head>
+
+<script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
+
+<% include ../partials/header.ejs %>
+<% include ../partials/nav.ejs %>
+
+<h3 align="center">Average Singapore PSI (Feb 2016 to Nov 2019)</h3>
+
+<br>
+<p>
+Singapore uses the Pollutant Standards Index or PSI as the official national reporting system for air quality. PSI is computed based on a 24-hour average of the concentration levels of the above mentioned pollutants. 
+</p>
+<p>
+We are interested to understand how Singapore PSI change over the year. For the purpose of visualization, we extracted data from Feb 2016 to Nov 2019. 
+</p>
+<p>
+The following charts are generated using Python codes, the code can be downloaded <a href="data/psi_chart.py">here</a><br/>
+</p>
+
+<div id="content">
+  <p> 
+    <b>Does PSI differs by region? </b>
+  </p>
+  <img src="data/Monthly_Avg_Psi.png" width="100%"></img>
+
+  <br/>
+  <p>
+    <b>What is the highest and lowest PSI index in Singapore from 2016 to 2019?</b>
+  </p>
+  <img src="data/Monthly_Avg_Psi_2.png" width="100%"></img>
+
+  <br/>
+  <p>
+    <b>Does the 'haze season' come regularly?</b>
+  </p>
+  <p>
+    We always thought that haze come around the month of August and we were right. But we didn't expect that it also come around the month of March and April. By visualizing a data, we gain insight that we never thought we'd have! 
+  </p>
+  <img src="data/Monthly_Avg_Psi_3.png" width="100%"></img>
+</div>
+
+<br/><br/>

@@ -16,16 +16,8 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
+  .get('/v2', (req, res) => res.render('pages/v2'))
+  .get('/v3', (req, res) => res.render('pages/v3'))
+  .get('/v4', (req, res) => res.render('pages/v4'))
+  .get('/v5', (req, res) => res.render('pages/v5'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-
-app.get('/',function(req,res){
-	res.render('index.html', { 
-    	title: "Visualization 1: Co-occurence Matrix" 
-    })
-});
-
-app.get('/v2',function(req,res){
-	res.render('vis2.html', { 
-    	title: "Visualization 2: Conferences by Rank and Number of Papers Published" 
-    })
-});
