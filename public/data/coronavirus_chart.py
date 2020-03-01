@@ -47,51 +47,51 @@ for lat, lon, value, name in zip(world_data['latitude'], world_data['longitude']
 						fill_opacity=0.7 ).add_to(world_map)
 world_map.save("data/world_map.html")
 
-China 	= data_latest[data_latest['Country'] == 'China']
+# China 	= data_latest[data_latest['Country'] == 'China']
 
-bars 		= China["Province/State"].to_numpy()
-death 		= China["Deaths"].to_numpy()
-recovered 	= China["Recovered"].to_numpy()
-confirmed 	= China["Confirmed"].to_numpy()
+# bars 		= China["Province/State"].to_numpy()
+# death 		= China["Deaths"].to_numpy()
+# recovered 	= China["Recovered"].to_numpy()
+# confirmed 	= China["Confirmed"].to_numpy()
 
-Hubei 		= (int(death[0]), int(recovered[0]), int(confirmed[0]))
+# Hubei 		= (int(death[0]), int(recovered[0]), int(confirmed[0]))
 
-# Exclude Hubei
-bars		= bars[1:]
-death		= death[1:]
-recovered	= recovered[1:]
-confirmed	= confirmed[1:]
-y_pos 		= np.arange(len(bars))
-width 		= 0.8
+# # Exclude Hubei
+# bars		= bars[1:]
+# death		= death[1:]
+# recovered	= recovered[1:]
+# confirmed	= confirmed[1:]
+# y_pos 		= np.arange(len(bars))
+# width 		= 0.8
 
-fig, ax = plt.subplots(figsize=(30, 20))
-ax.set_title("Coronavirus (2019-nCoV) Confirmed, Recovered, Death Status in China (exclude Hubei)\n", fontsize=30)
-ax.barh(y_pos, confirmed, width, color='red', label='Confirmed')
-ax.barh(y_pos, recovered, width, color='green', label='Recovered')
-ax.barh(y_pos, death, width, color='black', label='Death')
+# fig, ax = plt.subplots(figsize=(30, 20))
+# ax.set_title("Coronavirus (2019-nCoV) Confirmed, Recovered, Death Status in China (exclude Hubei)\n", fontsize=30)
+# ax.barh(y_pos, confirmed, width, color='red', label='Confirmed')
+# ax.barh(y_pos, recovered, width, color='green', label='Recovered')
+# ax.barh(y_pos, death, width, color='black', label='Death')
 
-for i, v in enumerate(confirmed):
-	if v == 0: continue
-	plt.text(v + 3, i - 0.2, str(int(v)), color='black', fontsize=20)
+# for i, v in enumerate(confirmed):
+# 	if v == 0: continue
+# 	plt.text(v + 3, i - 0.2, str(int(v)), color='black', fontsize=20)
 
-for i, v in enumerate(recovered):
-	if v == 0: continue
-	plt.text(v + 3, i - 0.2, str(int(v)), color='white', fontsize=20)
+# for i, v in enumerate(recovered):
+# 	if v == 0: continue
+# 	plt.text(v + 3, i - 0.2, str(int(v)), color='white', fontsize=20)
 
-for i, v in enumerate(death):
-	if v == 0 or (recovered[i] - death[i] < 4): continue
-	plt.text(v + 3, i - 0.2, str(int(v)), color='white', fontsize=20)
+# for i, v in enumerate(death):
+# 	if v == 0 or (recovered[i] - death[i] < 4): continue
+# 	plt.text(v + 3, i - 0.2, str(int(v)), color='white', fontsize=20)
 
-ax.text(600, 24, "Hubei - Confirmed: " + str(Hubei[2]) + ", Recovered: " + str(Hubei[1]) + ", Deaths: " + str(Hubei[0]), bbox=dict(facecolor='red', alpha=0.1), fontsize=20)
-ax.set(yticks=y_pos, yticklabels=bars)
-for tick in ax.xaxis.get_major_ticks():
-    tick.label.set_fontsize(25) 
+# ax.text(600, 24, "Hubei - Confirmed: " + str(Hubei[2]) + ", Recovered: " + str(Hubei[1]) + ", Deaths: " + str(Hubei[0]), bbox=dict(facecolor='red', alpha=0.1), fontsize=20)
+# ax.set(yticks=y_pos, yticklabels=bars)
+# for tick in ax.xaxis.get_major_ticks():
+#     tick.label.set_fontsize(25) 
 
-for tick in ax.yaxis.get_major_ticks():
-    tick.label.set_fontsize(25) 
+# for tick in ax.yaxis.get_major_ticks():
+#     tick.label.set_fontsize(25) 
 
-ax.legend(fontsize=20)
+# ax.legend(fontsize=20)
 
-# plt.show()
-plt.savefig('data/nCov_status_china.png', bbox_inches="tight") 
+# # plt.show()
+# plt.savefig('data/nCov_status_china.png', bbox_inches="tight") 
 

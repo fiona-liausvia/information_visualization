@@ -32,6 +32,9 @@
   Do conferences in higher ranks publish less papers?
 </p>
 <p>
+  To visualize this information, we grouped conferences by ranks and count the number of papers published in each conference. As a base data, we extracted conferences which are recommended by <a href="data/ccf2019_r4.csv">CCF List</a>.
+</p>
+<p>
 Preprocessed dataset can be downloaded <a href="data/conf_treemap_2018.json">here (2018)</a> and <a href="data/conf_treemap_2019.json">here (2019)</a>.
 </p>
 
@@ -41,11 +44,13 @@ Preprocessed dataset can be downloaded <a href="data/conf_treemap_2018.json">her
 <button class="button" onclick="toggle2019()">Year 2019</button>
 
 <div id="content2018">
+  <h4>Conferences by Rank and Number of Papers Published (Year 2018)</h4>
   <svg id="legend" width="500" height="70"></svg>
   <svg class="year2018" width="930" height="800"></svg>
 </div>
 
 <div id="content2019">
+  <h4>Conferences by Rank and Number of Papers Published (Year 2019)</h4>
   <svg id="legend2" width="500" height="70"></svg>
   <svg class="year2019" width="930" height="800"></svg>
 </div>
@@ -55,29 +60,20 @@ Preprocessed dataset can be downloaded <a href="data/conf_treemap_2018.json">her
 
 <script>
   function toggle2018() {
-    var x = document.getElementById("content2018");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-    var y = document.getElementById("content2019");
+    var y = document.getElementById("content2018");
     y.style.display = "block";
+    var x = document.getElementById("content2019");
+    x.style.display = "none";
   }
 
   function toggle2019() {
-    var x = document.getElementById("content2019");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-
-    var y = document.getElementById("content2018");
+    var y = document.getElementById("content2019");
     y.style.display = "block";
+    var x = document.getElementById("content2018");
+    x.style.display = "none";
   }
 
-  toggle2019() 
+  toggle2018() 
 
   function set_legend1() {
     d3.select("#legend")
