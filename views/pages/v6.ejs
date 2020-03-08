@@ -1,0 +1,189 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/dashboard.css" rel="stylesheet" type="text/css" media="screen" />
+    
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+  </head>
+
+  <body>
+    <section class="heightviewport">  
+      <div class="clearfix">
+        <div class="dashboard_header_box">
+          <div class="dashboard_title">
+            COVID-19 DataViz Challenge
+          </div>
+        </div>
+        <div class="dashboard_header_box">
+          <div class="dashboard_title_right">
+            <a href="/">home</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <div class="column menu" id="sidebar">
+          <p>Singapore</p>
+        </div>
+        <div class="column content" id="main">
+          <button id="play-button">Play</button>
+          <button>Map</button>
+          <button>Stats</button>
+          <br/>
+          <svg width="800" height="50" id="slider_svg"></svg>
+          <div id="map">
+            <svg width="900" height="480" id="map_svg"></svg>           
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+  <script>
+    // MAP SLIDER
+    var slider_svg     = d3.select("#slider_svg");
+    var playButton     = d3.select("#play-button")
+    var margin_left    = 12
+    var margin_right   = 30
+    var slider_width   = slider_svg.attr("width") - margin_right;
+    var slider_height  = slider_svg.attr("height");
+
+    var slider_target = slider_actual = 0;
+    var alpha       = 0.2;
+    var timer       = d3.timer(updateTween);
+    var stepTimer;
+    var moving      = false;
+    var maxValue    = 30;
+    var trailLength = 5;
+
+    var x = d3.scaleLinear().domain([0, 30]).range([0, slider_width]).clamp(true); 
+    //0 to 180 is the length of day from 22.01.2020 to 29.02.2020
+    //var x = d3.scaleTime().domain([new Date(2020, 0, 22), new Date(2020, 1, 29)]).range([0, slider_width]).clamp(true); 
+
+    var slider = slider_svg.append("g")
+      .attr("class", "slider")
+      .attr("transform", "translate(" + margin_left + ", " + slider_height / 2 + ")");
+
+    slider.append("line")
+        .attr("class", "track")
+        .attr("x1", x.range()[0])
+        .attr("x2", x.range()[1])
+      .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-inset")
+      .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-overlay")
+        .call(d3.drag()
+            .on("start.interrupt", () => slider.interrupt())
+            .on("start drag", () => update(x.invert(d3.event.x))));
+
+    slider.insert("g", ".track-overlay")
+        .attr("class", "ticks")
+        .attr("transform", "translate(0," + 18 + ")")
+      .selectAll("text")
+      .data(x.ticks(20)).enter()
+      .append("text")
+        .attr("x", x)
+        .attr("text-anchor", "middle")
+//        .text(d => d.getDate() + "/" + d.getMonth() + 1)
+        .text(d => "Day " + d)
+        .style('fill', 'white')
+
+    const handle = slider.insert("circle", ".track-overlay")
+        .attr("class", "handle")
+        .attr("r", 9);
+
+    d3.select(window)
+        .on("keydown", keydowned);
+
+    playButton
+        .on("click", paused)
+        .each(paused);
+
+    function update(d) {
+      slider_target = d;
+      moving = true;
+      timer.restart(updateTween);
+    }
+
+    function updateTween() {
+      // This is where color are changed - connect to map 
+      var diff = slider_target - slider_actual;
+      
+      if (Math.abs(diff) < 1e-3) {
+        slider_actual = slider_target; 
+        timer.stop();
+      }
+      else slider_actual += diff * alpha;
+      
+      handle.attr("cx", x(slider_actual));
+    }
+
+    function keydowned() {
+      let currentValue = slider_actual;
+      if (d3.event.metaKey || d3.event.altKey) return;
+      switch (d3.event.keyCode) {
+        case 37: currentValue = Math.max(x.domain()[0], slider_actual - trailLength); break;
+        case 39: currentValue = Math.min(x.domain()[1], slider_actual + trailLength); break;
+        default: return;
+      }
+      update(currentValue);
+      paused();
+    }
+
+    function paused() {
+      if (moving) {
+        slider.interrupt();
+        clearInterval(stepTimer);
+        moving = false;
+        playButton.text("Play");
+      } else {
+        if (slider_actual > maxValue) slider_actual = 0;
+        stepTimer = setInterval(step, 100);
+        moving = true;
+        playButton.text("Pause");
+      }
+    }
+
+    function step() {
+      if (slider_actual > maxValue) paused();
+      else update(slider_actual + trailLength / 10);
+    }
+
+    // MAP
+    var map         = d3.select("#map_svg");
+    var projection  = d3.geo.mercator();
+    var path        = d3.geo.path().projection(projection);
+
+    d3.json("https://unpkg.com/world-atlas@1/world/110m.json", function(error, world) {
+      if (error) throw error;
+
+      map.selectAll("path")
+         .data(topojson.feature(world,world.objects.countries).features)
+         .enter().append("path")
+         .attr("d", path);
+
+      // Read Latitude Longitude
+      d3.json("data/covid/map.json", function(error, d) {
+        map.selectAll("circle")
+            .data(d).enter()
+            .append("circle")
+            .attr("class", "site")
+            .attr("cx", function(d) {
+              return projection([d.lng, d.lat])[0];
+            })
+            .attr("cy", function(d) {
+              return projection([d.lng, d.lat])[1];
+            })
+            .attr("r", 1)
+            .transition().duration(1000)
+            .attr("r", 10);
+      });
+
+    });
+
+
+  </script>  
+
+</html>

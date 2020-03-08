@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box; 
+}
+
+body {
+  margin: 0; 
+  font-weight: 500;
+  font-family: 'Oswald', 'HelveticaNeue';
+}
+
+section {
+  width: 100%;
+  padding: 0 1%;
+  display: table;
+  margin: 0;
+  max-width: none;
+  background-color: #373B44;
+  height: 100vh;
+  
+  &:nth-of-type(2n) {
+    background-color: #FE4B74;
+  }
+}
+
+.heightviewport {
+  height: 100vh;
+}
+
+.dashboard_title {
+  font-size: 2em;
+  display: block;
+  color: white;
+  opacity: 0.5;
+  font-weight: 300;
+  font-family: 'Oswald', 'HelveticaNeue';
+  text-transform: uppercase;  
+}
+
+.dashboard_title_right {
+  font-size: 1.2em;
+  display: block;
+  color: white;  
+  font-weight: 300;
+  font-family: 'Oswald', 'HelveticaNeue';
+  text-transform: uppercase;  
+  float: right;
+  padding: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.dashboard_header_box {
+  float: left;
+  width: 50%;
+  padding: 0px;
+}
+
+.column {
+  float: left;
+}
+
+.menu {
+  width: 10%;
+}
+
+.content {
+  width: 90%;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+h1 {
+  font-size: 3em;
+  display: block;
+  color: white;
+  font-weight: 300;
+  font-family: 'Oswald', 'HelveticaNeue';
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  color: white;
+  opacity: 0.5;
+}
+
+a {
+  font-weight: 700;
+  color: #DEFFFC;
+  opacity: 0.5;
+  position: relative;
+  
+  &:hover{ 
+    opacity: 0.8;
+  }
+  
+  &:active {
+    top: 1px;
+  }
+}
+
+footer {
+  padding: 1% 5%;
+  text-align:center;
+  background-color: #373B44;
+  color: white;
+  
+  a {
+    color: #FE4B74;
+    font-weight: 500;
+    text-decoration: none;
+  }
+}
+
+/* MAP */
+/*
+.map_svg {
+  width: 100%;
+  height: 60vh;
+  margin: 0px 
+  auto;
+}*/
+
+.site {
+  stroke-width: .5px;
+  stroke: white;
+  opacity: 0.5;
+  fill: white;
+}
+
+/* MAP SLIDER */
+.ticks {
+  font: 10px Arial, Helvetica, sans-serif;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+  stroke-linecap: round;
+}
+
+.track {
+  stroke: white;
+  stroke-width: 10px;
+}
+
+.track-inset {
+  stroke: #ddd;
+  stroke-width: 8px;
+}
+
+.track-overlay {
+  pointer-events: stroke;
+  stroke-width: 50px;
+  cursor: crosshair;
+}
+
+.handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 1.25px;
+}
