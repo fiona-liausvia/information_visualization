@@ -17,10 +17,10 @@ var slider_x 							= d3.scaleLinear().domain([0, slider_max_val]).range([0, sli
 var slider_date 					= new Date(2020, 0, 22); //COVID19_open_line_list 
 
 // DATA
+var date_list 			= ["1/22/20", "1/23/20", "1/24/20", "1/25/20",	"1/26/20", "1/27/20", "1/28/20", "1/29/20", "1/30/20", "1/31/20", "2/1/20", "2/2/20", "2/3/20", "2/4/20", "2/5/20", "2/6/20", "2/7/20", "2/8/20", "2/9/20", "2/10/20", "2/11/20", "2/12/20", "2/13/20", "2/14/20", "2/15/20", "2/16/20", "2/17/20", "2/18/20", "2/19/20", "2/20/20"]
 var map_circle 			= []	
 var infected_data 	= {}
-var date_list 			= ["1/22/20", "1/23/20", "1/24/20", "1/25/20",	"1/26/20", "1/27/20", "1/28/20", "1/29/20", "1/30/20", "1/31/20", "2/1/20", "2/2/20", "2/3/20", "2/4/20", "2/5/20", "2/6/20", "2/7/20", "2/8/20", "2/9/20", "2/10/20", "2/11/20", "2/12/20", "2/13/20", "2/14/20", "2/15/20", "2/16/20", "2/17/20", "2/18/20", "2/19/20", "2/20/20"]
-d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
+d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {	
 	for (var j=0; j < date_list.length; j++) {
 		infected_data[j] = []
 		for (var i=0; i < d.length; i++) {
@@ -28,7 +28,43 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
 				"lat": d[i]["Lat"],
 				"lng": d[i]["Long"],
 				"r": get_radius(d[i][date_list[j]]),
-				"id": i
+				"size": d[i][date_list[j]],
+				"id": j + "_" + i,
+				"country": d[i]["Country/Region"],
+				"province": d[i]["Province/State"],
+				"date": date_list[j]
+			}) 
+		}
+	}
+});
+
+var recovered_data 	= {}
+d3.csv("data/covid/time_series_covid_19_recovered.csv", function(error, d) {	
+	for (var j=0; j < date_list.length; j++) {
+		recovered_data[j] = []
+		for (var i=0; i < d.length; i++) {
+			recovered_data[j].push({
+				"lat": d[i]["Lat"],
+				"lng": d[i]["Long"],
+				"r": get_radius(d[i][date_list[j]]),
+				"size": d[i][date_list[j]],
+				"id": j + "_" + i
+			}) 
+		}
+	}
+});
+
+var deaths_data 	= {}
+d3.csv("data/covid/time_series_covid_19_deaths.csv", function(error, d) {	
+	for (var j=0; j < date_list.length; j++) {
+		deaths_data[j] = []
+		for (var i=0; i < d.length; i++) {
+			deaths_data[j].push({
+				"lat": d[i]["Lat"],
+				"lng": d[i]["Long"],
+				"r": get_radius(d[i][date_list[j]]),
+				"size": d[i][date_list[j]],
+				"id": j + "_" + i
 			}) 
 		}
 	}
@@ -79,8 +115,6 @@ d3.json("https://unpkg.com/world-atlas@1/world/110m.json", function(error, world
      .data(topojson.feature(world,world.objects.countries).features)
      .enter().append("path")
      .attr("d", path);
-
-  update_circle()
 });
 
 function get_radius(r) {
@@ -114,7 +148,11 @@ function update_circle() {
  	    //.attr("r", 1)
      	//.transition().duration(200)
       .attr("r", function(d) { return d.r })
-      //.attr("id", function(d) { return d.id })
+      .attr("id", function(d) { return d.id })
+      .attr("country", function(d) { return d.country } )
+      .attr("province", function(d) { return d.province } )   
+      .attr("date", function(d) { return d.date } )            
+      .on("click", circle_clicked)
 
   circ.exit()
   	//.transition().duration(200)
@@ -166,8 +204,8 @@ function keydowned() {
   let currentValue = slider_actual;
   if (d3.event.metaKey || d3.event.altKey) return;
   switch (d3.event.keyCode) {
-    case 37: currentValue = Math.max(slider_x.domain()[0], slider_actual - slider_trail_length); break;
-    case 39: currentValue = Math.min(slider_x.domain()[1], slider_actual + slider_trail_length); break;
+    case 37: currentValue = Math.max(slider_x.domain()[0], slider_actual - slider_trail_length / 10); break;
+    case 39: currentValue = Math.min(slider_x.domain()[1], slider_actual + slider_trail_length / 10); break;
     default: return;
   }
   update(currentValue);
@@ -191,4 +229,28 @@ function paused() {
 function step() {
   if (slider_actual > slider_max_val) paused();
   else update(slider_actual + slider_trail_length / 10);
+}
+
+function circle_clicked() {
+	id 					= this.id.split("_")
+	day_idx 		= id[0]
+	country_idx = id[1]
+
+	country_info = this.getAttribute("country")
+	province_info = ""
+	if (this.getAttribute("province") != null) {
+		province_info = this.getAttribute("province")
+	}
+
+	d3.select("#confirmed_text").text("Confirmed")
+	d3.select("#recovered_text").text("Recovered")
+	d3.select("#death_text").text("Deaths")
+
+	d3.select("#date_map").text(this.getAttribute("date"))
+	d3.select("#country_map").text(country_info)
+	d3.select("#province_map").text(province_info)
+	d3.select("#confirmed_map").text(infected_data[day_idx][country_idx].size)
+	d3.select("#recovered_map").text(recovered_data[day_idx][country_idx].size)
+	d3.select("#deaths_map").text(deaths_data[day_idx][country_idx].size)
+
 }
