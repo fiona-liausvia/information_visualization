@@ -31,7 +31,7 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
 				"size": d[i][date_list[j]],
 				"id": j + "_" + i,
 				"country": d[i]["Country/Region"],
-				"province": d[i]["Province/State"],
+				"province": d[i]["Province/State"],				
 				"date": date_list[j]
 			}) 
 		}

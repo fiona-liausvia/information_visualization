@@ -124,8 +124,21 @@ footer {
   }
 }
 
-/* MAP */
+/* BAR */
+.axis_white line{
+  stroke: white;
+}
 
+.axis_white path{
+  stroke: white;
+}
+
+.axis_white text{
+  fill: white;
+}  
+
+
+/* MAP */
 .map_svg {
   width: 100%;
   height: 30vh;
