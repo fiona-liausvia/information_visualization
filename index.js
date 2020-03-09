@@ -22,3 +22,14 @@ express()
   .get('/v5', (req, res) => res.render('pages/v5'))
   .get('/covid', (req, res) => res.render('pages/v6'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+file_path = path.join(__dirname, '/public/data/covid/') + "time_series_covid_19_confirmed.csv"
+if (fs.existsSync(file_path)) {
+  var slider_date = new Date(2020, 0, 22);
+
+  loaded = fs.readFileSync(file_path, "utf8").split("\n")
+
+/*  for (i in loaded) {
+    console.log(loaded[i])
+  }*/
+}
