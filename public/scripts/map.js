@@ -1,5 +1,5 @@
-var slider_svg     = d3.select("#slider_svg");
-var playButton     = d3.select("#play-button")
+var slider_svg            = d3.select("#slider_svg");
+var playButton            = d3.select("#play-button")
 var slider_margin_left    = 12
 var slider_margin_right   = 30
 var slider_width   				= slider_svg.attr("width") - slider_margin_right;

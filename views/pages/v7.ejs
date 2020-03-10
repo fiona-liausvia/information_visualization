@@ -10,49 +10,6 @@
   </head>
 
   <body>
-    <section class="heightviewport" id="top">  
-      <div class="clearfix">
-        <div class="dashboard_header_box">
-          <div class="dashboard_title">
-            COVID-19 DataViz Challenge            
-          </div>
-        </div>
-        <div class="dashboard_header_box">
-          <div class="dashboard_title_right">
-            <a href="/covid">Map</a> | 
-            <a href="/covidstats">Stats</a> | 
-            <a href="/">home</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="clearfix">
-        <!--
-        <div class="column menu" id="sidebar">
-          <p>Singapore</p>
-        </div>
-        -->
-        <div class="column content" id="main">
-          <button id="play-button">Play</button><br/>
-          <svg width="800" height="50" id="slider_svg"></svg>
-          <div id="map">
-            <svg width="980" height="450" id="map_svg"></svg>           
-          </div>
-        </div>
-        <div class="column right-content">
-          <div id="info_map">
-            <p id="date_map"></p>
-            <p id="country_map"></p>
-            <p id="province_map"></p>
-            <div id="confirmed_text"></div> <p id="confirmed_map"></p>
-            <div id="recovered_text"></div> <p id="recovered_map"></p>
-            <div id="death_text"></div> <p id="deaths_map"></p>
-            TODO: display line_list_data.csv news here            
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="heightviewport" id="bottom">  
       <div class="clearfix">
         <div class="dashboard_header_box">
@@ -62,8 +19,8 @@
         </div>
         <div class="dashboard_header_box">
           <div class="dashboard_title_right">
-            <a href="#top">Map</a> | 
-            <a href="#bottom">Stats</a> | 
+            <a href="/covid">Map</a> | 
+            <a href="/covidstats">Stats</a> | 
             <a href="/">home</a>
           </div>
         </div>
@@ -95,6 +52,6 @@
     </section>
   </body>
 
-  <script type="text/javascript" src="/scripts/map.js"></script>
+  <script type="text/javascript" src="/scripts/stats.js"></script>
 
 </html>
