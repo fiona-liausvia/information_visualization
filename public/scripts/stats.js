@@ -2,26 +2,40 @@ var date_list       = ["1/22/20", "1/23/20", "1/24/20", "1/25/20",  "1/26/20", "
 continents                = {}
 provinces                 = []
 provinces_no_hubei        = []
+countries                 = []
 wuhan_bar_data            = {}
 wuhan_bar_data_no_hubei   = {}
+country_bar_data          = {}
 
-wuhan_margin  = {top: 20, right: 40, bottom: 30, left: 70},
-width         = 1200 - wuhan_margin.left - wuhan_margin.right,
-height        = 600 - wuhan_margin.top - wuhan_margin.bottom;
+wuhan_margin              = {top: 20, right: 40, bottom: 30, left: 70},
+width                     = 1200 - wuhan_margin.left - wuhan_margin.right,
+height                    = 600 - wuhan_margin.top - wuhan_margin.bottom;
 
 var bar;
 var bar_text;
+var bar_no_hubei;
+var bar_text_no_hubei;
+var bar_country;
+var bar_text_country;
+
 play_button_wuhan         = d3.select("#play-button-wuhan")
 sort_button_wuhan         = d3.select("#sort-button-wuhan")
 
-var bar_no_hubei;
-var bar_text_no_hubei;
 play_button_wuhan_no_hubei= d3.select("#play-button-wuhan-no-hubei")
 sort_button_wuhan_no_hubei= d3.select("#sort-button-wuhan-no-hubei")
+sort_recovered_button_wuhan_no_hubei  = d3.select("#sort-recovered-button-wuhan-no-hubei")
+sort_death_button_wuhan_no_hubei      = d3.select("#sort-death-button-wuhan-no-hubei")
+
+play_button_country           = d3.select("#play-button-country")
+sort_button_country           = d3.select("#sort-button-country")
+sort_recovered_button_country = d3.select("#sort-recovered-button-country")
+sort_death_button_country     = d3.select("#sort-death-button-country")
 
 var infected_data   = {}
 var recovered_data  = {}
 var deaths_data     = {}
+
+speed = 200
 
 // Data Preprocessing
 d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {  
@@ -63,6 +77,7 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
       for (day_th in infected_data) {
         wuhan_bar_data[day_th] = []
         wuhan_bar_data_no_hubei[day_th] = []
+        country_bar_data[day_th] = []
 
         for (var i = 0; i < infected_data[day_th].length; i++) {
           if (infected_data[day_th][i]["country"] == "Mainland China") {
@@ -82,6 +97,34 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
               })
             }
           }
+          else {
+            if (infected_data[day_th][i]["country"] == "US" || 
+                infected_data[day_th][i]["country"] == "Canada" ||
+                infected_data[day_th][i]["country"] == "Australia" ) {
+              cidx = find_country_data_idx(infected_data[day_th][i]["country"], country_bar_data[day_th])
+              if (cidx != -1) {
+                country_bar_data[day_th][cidx].confirmed += parseInt(infected_data[day_th][i]["size"])
+                country_bar_data[day_th][cidx].recovered += parseInt(recovered_data[day_th][i]["size"])
+                country_bar_data[day_th][cidx].deaths += parseInt(deaths_data[day_th][i]["size"])
+              }
+              else {
+                country_bar_data[day_th].push({
+                  "province": infected_data[day_th][i]["country"], 
+                  "confirmed": parseInt(infected_data[day_th][i]["size"]),
+                  "recovered": parseInt(recovered_data[day_th][i]["size"]),
+                  "deaths": parseInt(deaths_data[day_th][i]["size"])
+                })                  
+              }
+            }
+            else if (infected_data[day_th][i]["country"] != "Others") {
+              country_bar_data[day_th].push({
+                "province": infected_data[day_th][i]["country"], 
+                "confirmed": infected_data[day_th][i]["size"],
+                "recovered": recovered_data[day_th][i]["size"],
+                "deaths": deaths_data[day_th][i]["size"]
+              })            
+            }
+          }
         }
 
         temp = wuhan_bar_data[day_th][0]
@@ -97,9 +140,14 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
             provinces_no_hubei.push(infected_data[0][i]["province"])
           }
         }
+        else {
+          if (infected_data[day_th][i]["country"] != "Others") {
+            countries.push(infected_data[0][i]["country"])          
+          }
+        }
       }
-      temp = provinces[0]
-      provinces[0] = provinces[12]
+      temp          = provinces[0]
+      provinces[0]  = provinces[12]
       provinces[12] = temp
 
       // Wuhan 
@@ -197,6 +245,74 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
 
       play_button_wuhan_no_hubei.on("click", play_wuhan_no_hubei)  
       sort_button_wuhan_no_hubei.on("click", sort_wuhan_no_hubei)  
+      sort_recovered_button_wuhan_no_hubei.on("click", sort_recovered_wuhan_no_hubei)  
+      sort_death_button_wuhan_no_hubei.on("click", sort_death_wuhan_no_hubei)  
+
+      // Country
+      y_country       = d3.scaleBand().padding(0.2).domain(countries).range([0, height]);
+      x_country       = d3.scaleLinear().range([0, width]).domain([0, 110]);
+      svg_country     = d3.select("#country_bar_chart").append("svg")
+              .attr("width", width + wuhan_margin.left + wuhan_margin.right)
+              .attr("height", height + wuhan_margin.top + wuhan_margin.bottom)
+              .append("g").attr("transform", "translate(" + wuhan_margin.left + "," + wuhan_margin.top + ")");
+      svg_country.append("g").attr("class", "axis_white").call(d3.axisTop(x_country));
+      svg_country.append("g")
+        .attr("id", "y-country-axis")
+        .attr("class", "axis_white")
+        .call(d3.axisLeft(y_country));
+        
+      bar_country = svg_country.selectAll(".bar_confirmed_country").data(country_bar_data[0]).enter()
+        .append("rect")  
+        .attr("class", "bar_confirmed_country")
+        .attr("fill", "#B34742")
+        .attr("y", function(d) { return y_country(d.province); })
+        .attr("height", y_country.bandwidth())
+        .attr("width", 0)
+
+      bar_recovered_country = svg_country.selectAll(".bar_recovered_country").data(country_bar_data[0]).enter()
+        .append("rect")  
+        .attr("class", "bar_recovered_country")
+        .attr("fill", "#30E9FF")
+        .attr("y", function(d) { return y_country(d.province); })
+        .attr("height", y_country.bandwidth())
+        .attr("width", 0)      
+
+      bar_deaths_country = svg_country.selectAll(".bar_deaths_country").data(country_bar_data[0]).enter()
+        .append("rect")  
+        .attr("class", "bar_deaths_country")
+        .attr("fill", "#BD00A9")
+        .attr("y", function(d) { return y_country(d.province); })
+        .attr("height", y_country.bandwidth())
+        .attr("width", 0)               
+
+      bar_text_country = svg_country.selectAll(".bar_text_country").data(country_bar_data[0]).enter()
+        .append("text")
+        .attr("fill", "white")
+        .attr("x", function(d) { return x_country(d.confirmed) + 5; })
+        .attr("y", function(d) { return y_country(d.province); })    
+        .attr("font-size", "0.7em")
+        .text("")
+
+      bar_text_recovered_country = svg_country.selectAll(".bar_text_country").data(country_bar_data[0]).enter()
+        .append("text")
+        .attr("fill", "white")
+        .attr("x", function(d) { return x_country(d.recovered) + 5; })
+        .attr("y", function(d) { return y_country(d.province); })    
+        .attr("font-size", "0.7em")
+        .text("")
+
+      bar_text_deaths_country = svg_country.selectAll(".bar_text_country").data(country_bar_data[0]).enter()
+        .append("text")
+        .attr("fill", "black")
+        .attr("x", function(d) { return x_country(d.deaths) + 5; })
+        .attr("y", function(d) { return y_country(d.province); })    
+        .attr("font-size", "0.7em")
+        .text("")        
+
+      play_button_country.on("click", play_country)  
+      sort_button_country.on("click", sort_country)  
+      sort_recovered_button_country.on("click", sort_recovered_country)  
+      sort_death_button_country.on("click", sort_death_country)  
     });
   });
 });
@@ -228,7 +344,7 @@ function play_wuhan() {
 
     wuhan_bar_step++;
     if (wuhan_bar_step == Object.keys(wuhan_bar_data).length) t.stop();
-  }, 500)
+  }, speed)
 }
 
 function sort_wuhan() {
@@ -326,7 +442,7 @@ function play_wuhan_no_hubei() {
 
     wuhan_no_hubei_bar_step++;
     if (wuhan_no_hubei_bar_step == 30) t.stop();
-  }, 500)  
+  }, speed)  
 }
 
 function sort_wuhan_no_hubei() {
@@ -396,7 +512,425 @@ function sort_wuhan_no_hubei() {
     .text(function(d) { 
       return d.deaths; 
     })
+}
 
+function sort_recovered_wuhan_no_hubei() {
+  last_idx = Object.keys(wuhan_bar_data_no_hubei).length - 1
+
+  new_data = JSON.parse(JSON.stringify(wuhan_bar_data_no_hubei[last_idx]))
+
+  new_data.sort(function(a, b) { return b.recovered - a.recovered; })
+
+  sorted_provinces_no_hubei = []
+  for (var i = 0; i < new_data.length; i++) 
+    sorted_provinces_no_hubei.push(new_data[i].province)
+
+  y_no_hubei.domain(sorted_provinces_no_hubei)
+  svg_no_hubei.select("#y-axis-nohubei").remove()
+  svg_no_hubei.append("g")
+    .attr("id", "y-axis-nohubei")
+    .attr("class", "axis_white").call(d3.axisLeft(y_no_hubei));
+
+  bar_no_hubei = bar_no_hubei.data(new_data);
+  bar_no_hubei.transition().duration(300)
+    .attr("y", function(d) { return y_no_hubei(d.province); })
+    .attr("width", function(d) {
+      return x_no_hubei(d.confirmed); 
+    })
+  bar_text_no_hubei = bar_text_no_hubei.data(new_data); // , function(d) { return d; }
+
+  bar_recovered_no_hubei = bar_recovered_no_hubei.data(new_data);
+  bar_recovered_no_hubei.transition().duration(300)
+    .attr("y", function(d) { return y_no_hubei(d.province); })
+    .attr("width", function(d) {
+      return x_no_hubei(d.recovered); 
+    })
+  bar_text_recovered_no_hubei = bar_text_recovered_no_hubei.data(new_data); // , function(d) { return d; }
+
+  bar_deaths_no_hubei = bar_deaths_no_hubei.data(new_data);
+  bar_deaths_no_hubei.transition().duration(300)
+    .attr("y", function(d) { return y_no_hubei(d.province); })
+    .attr("width", function(d) {
+      return x_no_hubei(d.deaths); 
+    })
+  bar_text_deaths_no_hubei = bar_text_deaths_no_hubei.data(new_data); // , function(d) { return d; }
+
+  bar_text_no_hubei.transition().duration(300)
+    .attr("x", function(d) { return x_no_hubei(d.confirmed); })
+    .attr("y", function(d) { 
+      return y_no_hubei(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.confirmed; 
+    })
+
+  bar_text_recovered_no_hubei.transition().duration(300)
+    .attr("x", function(d) { return x_no_hubei(d.recovered); })
+    .attr("y", function(d) { 
+      return y_no_hubei(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.recovered; 
+    })
+
+  bar_text_deaths_no_hubei.transition().duration(300)
+    .attr("x", function(d) { return x_no_hubei(d.deaths); })
+    .attr("y", function(d) { 
+      return y_no_hubei(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.deaths; 
+    })
+}
+
+function sort_death_wuhan_no_hubei() {
+  last_idx = Object.keys(wuhan_bar_data_no_hubei).length - 1
+
+  new_data = JSON.parse(JSON.stringify(wuhan_bar_data_no_hubei[last_idx]))
+
+  new_data.sort(function(a, b) { 
+    if (b.deaths == a.deaths) {
+      return b.recovered - a.recovered
+    }
+    return b.deaths - a.deaths; 
+  })
+
+  sorted_provinces_no_hubei = []
+  for (var i = 0; i < new_data.length; i++) 
+    sorted_provinces_no_hubei.push(new_data[i].province)
+
+  y_no_hubei.domain(sorted_provinces_no_hubei)
+  svg_no_hubei.select("#y-axis-nohubei").remove()
+  svg_no_hubei.append("g")
+    .attr("id", "y-axis-nohubei")
+    .attr("class", "axis_white").call(d3.axisLeft(y_no_hubei));
+
+  bar_no_hubei = bar_no_hubei.data(new_data);
+  bar_no_hubei.transition().duration(300)
+    .attr("y", function(d) { return y_no_hubei(d.province); })
+    .attr("width", function(d) {
+      return x_no_hubei(d.confirmed); 
+    })
+  bar_text_no_hubei = bar_text_no_hubei.data(new_data); // , function(d) { return d; }
+
+  bar_recovered_no_hubei = bar_recovered_no_hubei.data(new_data);
+  bar_recovered_no_hubei.transition().duration(300)
+    .attr("y", function(d) { return y_no_hubei(d.province); })
+    .attr("width", function(d) {
+      return x_no_hubei(d.recovered); 
+    })
+  bar_text_recovered_no_hubei = bar_text_recovered_no_hubei.data(new_data); // , function(d) { return d; }
+
+  bar_deaths_no_hubei = bar_deaths_no_hubei.data(new_data);
+  bar_deaths_no_hubei.transition().duration(300)
+    .attr("y", function(d) { return y_no_hubei(d.province); })
+    .attr("width", function(d) {
+      return x_no_hubei(d.deaths); 
+    })
+  bar_text_deaths_no_hubei = bar_text_deaths_no_hubei.data(new_data); // , function(d) { return d; }
+
+  bar_text_no_hubei.transition().duration(300)
+    .attr("x", function(d) { return x_no_hubei(d.confirmed); })
+    .attr("y", function(d) { 
+      return y_no_hubei(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.confirmed; 
+    })
+
+  bar_text_recovered_no_hubei.transition().duration(300)
+    .attr("x", function(d) { return x_no_hubei(d.recovered); })
+    .attr("y", function(d) { 
+      return y_no_hubei(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.recovered; 
+    })
+
+  bar_text_deaths_no_hubei.transition().duration(300)
+    .attr("x", function(d) { return x_no_hubei(d.deaths); })
+    .attr("y", function(d) { 
+      return y_no_hubei(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.deaths; 
+    })
+}
+
+function find_country_data_idx(country, dt) {
+  for (var i = 0; i < dt.length; i++) {
+    if (dt[i].province == country) {
+      console.log("FOUND", dt[i].province, country)
+      return i;
+    }
+  }
+  return -1;
+}
+
+function play_country() {
+  y_country.domain(countries)
+  svg_country.select("#y-country-axis").remove()
+  svg_country.append("g")
+    .attr("id", "y-country-axis")
+    .attr("class", "axis_white")
+    .call(d3.axisLeft(y_country));
+
+  wuhan_bar_step = 0
+  var t = d3.interval(function() {
+    new_data = country_bar_data[wuhan_bar_step]
+
+    bar_country = bar_country.data(new_data);
+    bar_country.transition().duration(300)
+      .attr("y", function(d) { return y_country(d.province); })
+      .attr("width", function(d) { return x_country(d.confirmed); })
+    bar_text_country = bar_text_country.data(new_data); // , function(d) { return d; }
+
+    bar_recovered_country = bar_recovered_country.data(country_bar_data[wuhan_bar_step]);
+    bar_recovered_country.transition().duration(300)
+      .attr("y", function(d) { return y_country(d.province); })
+      .attr("width", function(d) {
+        return x_country(d.recovered); 
+      })
+    bar_text_recovered_country = bar_text_recovered_country.data(country_bar_data[wuhan_bar_step]); // , function(d) { return d; }
+
+    bar_deaths_country = bar_deaths_country.data(country_bar_data[wuhan_bar_step]);
+    bar_deaths_country.transition().duration(300)
+      .attr("y", function(d) { return y_country(d.province); })
+      .attr("width", function(d) {
+        return x_country(d.deaths); 
+      })
+    bar_text_deaths_country = bar_text_deaths_country.data(country_bar_data[wuhan_bar_step]); // , function(d) { return d; }
+
+    bar_text_country.transition().duration(300)
+      .attr("x", function(d) { return x_country(d.confirmed); })
+      .attr("y", function(d) { 
+        return y_country(d.province) + 13; 
+      })    
+      .text(function(d) { 
+        return d.confirmed; 
+      })
+
+    bar_text_recovered_country.transition().duration(300)
+      .attr("x", function(d) { return x_country(d.recovered); })
+      .attr("y", function(d) { 
+        return y_country(d.province) + 13; 
+      })    
+      .text(function(d) { 
+        return d.recovered; 
+      })
+
+    bar_text_deaths_country.transition().duration(300)
+      .attr("x", function(d) { return x_country(d.deaths); })
+      .attr("y", function(d) { 
+        return y_country(d.province) + 13; 
+      })    
+      .text(function(d) { 
+        return d.deaths; 
+      })
+
+    wuhan_bar_step++;
+    if (wuhan_bar_step == Object.keys(country_bar_data).length) t.stop();
+  }, speed)
+}
+
+function sort_country() {
+  last_idx = Object.keys(country_bar_data).length - 1
+
+  new_data = JSON.parse(JSON.stringify(country_bar_data[last_idx]))
+
+  new_data.sort(function(a, b) { return b.confirmed - a.confirmed; })
+
+  sorted_provinces = []
+  for (var i = 0; i < new_data.length; i++) 
+    sorted_provinces.push(new_data[i].province)
+
+  y_country.domain(sorted_provinces)
+  svg_country.select("#y-country-axis").remove()
+  svg_country.append("g")
+    .attr("id", "y-country-axis")
+    .attr("class", "axis_white").call(d3.axisLeft(y_country));
+
+  bar_country = bar_country.data(new_data);
+
+  bar_country.transition().duration(300)
+    .attr("y", function(d) { return y_country(d.province); })
+    .attr("width", function(d) { return x_country(d.confirmed); })
+  bar_text_country = bar_text_country.data(new_data); // , function(d) { return d; }
+
+  bar_recovered_country = bar_recovered_country.data(new_data);
+  bar_recovered_country.transition().duration(300)
+    .attr("y", function(d) { return y_country(d.province); })
+    .attr("width", function(d) {
+      return x_country(d.recovered); 
+    })
+  bar_text_recovered_country = bar_text_recovered_country.data(new_data); // , function(d) { return d; }
+
+  bar_deaths_country = bar_deaths_country.data(new_data);
+  bar_deaths_country.transition().duration(300)
+    .attr("y", function(d) { return y_country(d.province); })
+    .attr("width", function(d) {
+      return x_country(d.deaths); 
+    })
+  bar_text_deaths_country = bar_text_deaths_country.data(new_data); // , function(d) { return d; }
+
+
+  bar_text_country.transition().duration(300)
+    .attr("x", function(d) { return x_country(d.confirmed); })
+    .attr("y", function(d) { return y_country(d.province) + 10; })    
+    .text(function(d) { return d.confirmed; })
+
+  bar_text_recovered_country.transition().duration(300)
+    .attr("x", function(d) { return x_country(d.recovered); })
+    .attr("y", function(d) { 
+      return y_country(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.recovered; 
+    })
+
+  bar_text_deaths_country.transition().duration(300)
+    .attr("x", function(d) { return x_country(d.deaths); })
+    .attr("y", function(d) { 
+      return y_country(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.deaths; 
+    })
+}
+
+function sort_recovered_country() {
+  last_idx = Object.keys(country_bar_data).length - 1
+
+  new_data = JSON.parse(JSON.stringify(country_bar_data[last_idx]))
+
+  new_data.sort(function(a, b) { return b.recovered - a.recovered; })
+
+  sorted_provinces = []
+  for (var i = 0; i < new_data.length; i++) 
+    sorted_provinces.push(new_data[i].province)
+
+  y_country.domain(sorted_provinces)
+  svg_country.select("#y-country-axis").remove()
+  svg_country.append("g")
+    .attr("id", "y-country-axis")
+    .attr("class", "axis_white").call(d3.axisLeft(y_country));
+
+  bar_country = bar_country.data(new_data);
+
+  bar_country.transition().duration(300)
+    .attr("y", function(d) { return y_country(d.province); })
+    .attr("width", function(d) { return x_country(d.confirmed); })
+  bar_text_country = bar_text_country.data(new_data); // , function(d) { return d; }
+
+  bar_recovered_country = bar_recovered_country.data(new_data);
+  bar_recovered_country.transition().duration(300)
+    .attr("y", function(d) { return y_country(d.province); })
+    .attr("width", function(d) {
+      return x_country(d.recovered); 
+    })
+  bar_text_recovered_country = bar_text_recovered_country.data(new_data); // , function(d) { return d; }
+
+  bar_deaths_country = bar_deaths_country.data(new_data);
+  bar_deaths_country.transition().duration(300)
+    .attr("y", function(d) { return y_country(d.province); })
+    .attr("width", function(d) {
+      return x_country(d.deaths); 
+    })
+  bar_text_deaths_country = bar_text_deaths_country.data(new_data); // , function(d) { return d; }
+
+
+  bar_text_country.transition().duration(300)
+    .attr("x", function(d) { return x_country(d.confirmed); })
+    .attr("y", function(d) { return y_country(d.province) + 10; })    
+    .text(function(d) { return d.confirmed; })
+
+  bar_text_recovered_country.transition().duration(300)
+    .attr("x", function(d) { return x_country(d.recovered); })
+    .attr("y", function(d) { 
+      return y_country(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.recovered; 
+    })
+
+  bar_text_deaths_country.transition().duration(300)
+    .attr("x", function(d) { return x_country(d.deaths); })
+    .attr("y", function(d) { 
+      return y_country(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.deaths; 
+    })
+}
+
+function sort_death_country() {
+  last_idx = Object.keys(country_bar_data).length - 1
+
+  new_data = JSON.parse(JSON.stringify(country_bar_data[last_idx]))
+
+  new_data.sort(function(a, b) { 
+    if (b.deaths == a.deaths) {
+      return b.recovered - a.recovered
+    }
+    return b.deaths - a.deaths; 
+  })
+
+  sorted_provinces = []
+  for (var i = 0; i < new_data.length; i++) 
+    sorted_provinces.push(new_data[i].province)
+
+  y_country.domain(sorted_provinces)
+  svg_country.select("#y-country-axis").remove()
+  svg_country.append("g")
+    .attr("id", "y-country-axis")
+    .attr("class", "axis_white").call(d3.axisLeft(y_country));
+
+  bar_country = bar_country.data(new_data);
+
+  bar_country.transition().duration(300)
+    .attr("y", function(d) { return y_country(d.province); })
+    .attr("width", function(d) { return x_country(d.confirmed); })
+  bar_text_country = bar_text_country.data(new_data); // , function(d) { return d; }
+
+  bar_recovered_country = bar_recovered_country.data(new_data);
+  bar_recovered_country.transition().duration(300)
+    .attr("y", function(d) { return y_country(d.province); })
+    .attr("width", function(d) {
+      return x_country(d.recovered); 
+    })
+  bar_text_recovered_country = bar_text_recovered_country.data(new_data); // , function(d) { return d; }
+
+  bar_deaths_country = bar_deaths_country.data(new_data);
+  bar_deaths_country.transition().duration(300)
+    .attr("y", function(d) { return y_country(d.province); })
+    .attr("width", function(d) {
+      return x_country(d.deaths); 
+    })
+  bar_text_deaths_country = bar_text_deaths_country.data(new_data); // , function(d) { return d; }
+
+
+  bar_text_country.transition().duration(300)
+    .attr("x", function(d) { return x_country(d.confirmed); })
+    .attr("y", function(d) { return y_country(d.province) + 10; })    
+    .text(function(d) { return d.confirmed; })
+
+  bar_text_recovered_country.transition().duration(300)
+    .attr("x", function(d) { return x_country(d.recovered); })
+    .attr("y", function(d) { 
+      return y_country(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.recovered; 
+    })
+
+  bar_text_deaths_country.transition().duration(300)
+    .attr("x", function(d) { return x_country(d.deaths); })
+    .attr("y", function(d) { 
+      return y_country(d.province) + 13; 
+    })    
+    .text(function(d) { 
+      return d.deaths; 
+    })
 }
 
 /*
