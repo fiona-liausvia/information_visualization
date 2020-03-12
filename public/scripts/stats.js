@@ -660,7 +660,6 @@ function sort_death_wuhan_no_hubei() {
 function find_country_data_idx(country, dt) {
   for (var i = 0; i < dt.length; i++) {
     if (dt[i].province == country) {
-      console.log("FOUND", dt[i].province, country)
       return i;
     }
   }
