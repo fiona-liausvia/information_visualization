@@ -29,14 +29,14 @@ To run the server:
 3. If run successfully, it will print 'Listening on 5000'
 4. Open your browser and type 'http://127.0.0.1:5000/' 
 
-The codes which are mainly used for this section are in the following folder:
-|_____public 
-   |_____data 				(location of all datasets used for the OTOT-Task-F)
-|_____views
-   |_____pages
-      |____index.ejs 		(location of vis#1 for the OTOT-Task-F)
-      |____v2.ejs 			(location of vis#2 for the OTOT-Task-F)
-      |____v3.ejs 			(location of vis#3 for the OTOT-Task-F)
-      |____v4.ejs 			(location of vis#4 for the OTOT-Task-F)
-      |____v5.ejs 			(location of vis#5 for the OTOT-Task-F)
-|_____index.js
+The codes which are mainly used for this section are in the following folder:  
+|_____public  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_____data (location of all datasets used for the OTOT-Task-F)  
+|_____views  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_____pages  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|____index.ejs (location of vis#1 for the OTOT-Task-F)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|____v2.ejs (location of vis#2 for the OTOT-Task-F)    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|____v3.ejs (location of vis#3 for the OTOT-Task-F)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|____v4.ejs (location of vis#4 for the OTOT-Task-F)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|____v5.ejs (location of vis#5 for the OTOT-Task-F)  
+|_____index.js  
