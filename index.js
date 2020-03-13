@@ -25,7 +25,7 @@ express()
   .get('/covidstats2', (req, res) => res.render('pages/v8'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-/*
+
 function get_days_diff(date1, date2) {
   // Jan 19 2020 to Feb 27 2020
   var Difference_In_Time = date2.getTime() - date1.getTime();     
@@ -73,7 +73,7 @@ if (fs.existsSync(wdvp_file)) {
 		SEDA 						= parseFloat(list[9])
 		GDP 						= parseFloat(list[11])
     health_exp      = parseFloat(list[14])
-    educ_exp        = parseFloat(list[16])
+    educ_exp        = parseFloat(list[18])
 
 		correlation_data[country] = {
 			"region": region,
@@ -160,4 +160,3 @@ for (var i = 0; i < filter_country.length; i++) {
 var correlation_data_json = JSON.stringify(output_json);
 fs.writeFileSync('public/data/covid/correlation_data.json', correlation_data_json);
 
-*/

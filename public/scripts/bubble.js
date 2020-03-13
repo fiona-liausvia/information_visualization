@@ -112,7 +112,7 @@ pretty_text["happy_idx"] = "World Happiness Index"
 pretty_text["human_dev_idx"] = "Human Development Index"
 pretty_text["SEDA"] = "SEDA"
 pretty_text["GDP"] = "GDP"
-pretty_text["educ_exp"] = "Education Expenditure"
+pretty_text["educ_exp"] = "School Life Expectancy"
 
 function reload(y_index) {
   d3.json("data/covid/correlation_data.json", function(error, d) {
@@ -141,7 +141,7 @@ function reload(y_index) {
         x: d[country][y_index],
         y: recovery_rate,
         c: region[d[country]["region"]],
-        size: d[country]["population"]
+        size: d[country]["confirmed"][29]
       })    
     }
 
@@ -157,8 +157,8 @@ function reload(y_index) {
             .attr("height", height + margin + margin)
             .append("g").attr("transform", "translate(" + margin + "," + margin + ")");
 
-    var scale   = d3.scaleSqrt().domain([d3.min(data, function (d) { return d.size; }), d3.max(data, function (d) { return d.size; })]).range([1, 50]);
-    var opacity = d3.scaleSqrt().domain([d3.min(data, function (d) { return d.size; }), d3.max(data, function (d) { return d.size; })]).range([1, .5]);                    
+    var scale   = d3.scaleLog().domain([d3.min(data, function (d) { return d.size; }), d3.max(data, function (d) { return d.size; })]).range([1, 20]);
+    var opacity = d3.scaleLinear().domain([d3.min(data, function (d) { return d.size; }), d3.max(data, function (d) { return d.size; })]).range([1, .5]);                    
     var color   = d3.scale.category10();
 
     svg.append("g")
