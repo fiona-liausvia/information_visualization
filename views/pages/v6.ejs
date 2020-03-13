@@ -21,6 +21,7 @@
           <div class="dashboard_title_right">
             <a href="/covid">Map</a> | 
             <a href="/covidstats">Stats</a> | 
+            <a href="/covidstats2">Stats 2</a> | 
             <a href="/">home</a>
           </div>
         </div>
@@ -32,7 +33,12 @@
           <p>Singapore</p>
         </div>
         -->
-        <div class="column content" id="main">
+        <div class="column content-map" id="main">
+          <h5 style="color:white; font-family:Arial;">
+            Click play to see how different parts of the world are getting affected by the virus. <br/>
+            Click on each circle to see how many confirmed, recovered, and death patients in each region.
+          </h5>
+
           <button id="play-button">Play</button><br/>
           <svg width="800" height="50" id="slider_svg"></svg>
           <div id="map">
@@ -40,56 +46,18 @@
           </div>
         </div>
         <div class="column right-content">
+          <br/><br/><br/>
           <div id="info_map">
             <p id="date_map"></p>
             <p id="country_map"></p>
             <p id="province_map"></p>
-            <div id="confirmed_text"></div> <p id="confirmed_map"></p>
-            <div id="recovered_text"></div> <p id="recovered_map"></p>
-            <div id="death_text"></div> <p id="deaths_map"></p>
-            TODO: display line_list_data.csv news here            
+            <h4 style="color:red" id="confirmed_text"></h4> 
+            <p id="confirmed_map"></p>
+            <h4 style="color:green" id="recovered_text"></h4> 
+            <p id="recovered_map"></p>
+            <h4 style="color:grey" id="death_text"></h4> 
+            <p id="deaths_map"></p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="heightviewport" id="bottom">  
-      <div class="clearfix">
-        <div class="dashboard_header_box">
-          <div class="dashboard_title">
-            COVID-19 DataViz Challenge
-          </div>
-        </div>
-        <div class="dashboard_header_box">
-          <div class="dashboard_title_right">
-            <a href="#top">Map</a> | 
-            <a href="#bottom">Stats</a> | 
-            <a href="/">home</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="clearfix">
-        <div class="column content">
-          <button id="play-button-wuhan">Play</button><br/>
-          <button id="sort-button-wuhan">Sort</button><br/>
-          <svg id="wuhan_bar_chart" width="1200" height="600"></svg>
-          <button id="play-button-wuhan-no-hubei">Play</button><br/>
-          <button id="sort-button-wuhan-no-hubei">Sort</button><br/>
-          <svg id="wuhan_no_hubei_bar_chart" width="1200" height="600"></svg>
-          <button id="play-button-country">Play</button><br/>
-          <svg id="country_bar_chart" width="1200" height="600"></svg>
-
-
-          TODO: <br/>          
-          Wuhan not Wuhan <br/>
-          (COVID19_open_line_list.csv) <br/>
-          Fever, runny nose, Symptoms, no symptoms <br/>
-          (covid_19_data.csv - exactly same as 2019_nCoV_data.csv) - confirmed, recovered, death per continent<br/>
-          (with dataset of WVDP - correlation)<br/>
-          bubble chart of x-axis (WVDP properties), y-axis (recovery rate)<br/>
-        </div>
-        <div class="column right-content">
         </div>
       </div>
     </section>

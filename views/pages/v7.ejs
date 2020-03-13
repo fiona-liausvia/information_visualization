@@ -21,6 +21,7 @@
           <div class="dashboard_title_right">
             <a href="/covid">Map</a> | 
             <a href="/covidstats">Stats</a> | 
+            <a href="/covidstats2">Stats 2</a> | 
             <a href="/">home</a>
           </div>
         </div>
@@ -28,28 +29,41 @@
 
       <div class="clearfix">
         <div class="column content">
+          <h5 style="color:white; font-family:Arial;">
+            Click "Play" to view how many confirmed patients in China on each day since 22/01/2020. <br/>
+            Click "Sort" to view confirmed patients in China sorted by last recorded number (warning: only works when chart is not animating). 
+          </h5>
 
-          <svg id="bubble" height="900" width="900"></svg>
-
-          <svg id="venn" height="900" width="900"></svg>
-          <button id="play-button-wuhan">Play</button><br/>
+          <button id="play-button-wuhan">Play</button>
           <button id="sort-button-wuhan">Sort</button><br/>
-          <svg id="wuhan_bar_chart" width="1200" height="600"></svg>
-          <button id="play-button-wuhan-no-hubei">Play</button><br/>
-          <button id="sort-button-wuhan-no-hubei">Sort by Confirmed</button><br/>
-          <button id="sort-recovered-button-wuhan-no-hubei">Sort by Recovered</button><br/>
-          <button id="sort-death-button-wuhan-no-hubei">Sort by Death</button><br/>
-          <svg id="wuhan_no_hubei_bar_chart" width="1200" height="600"></svg>
-          <button id="play-button-country">Play</button><br/>
-          <button id="sort-button-country">Sort by Confirmed</button><br/>
-          <button id="sort-recovered-button-country">Sort by Recovered</button><br/>
-          <button id="sort-death-button-country">Sort by Death</button><br/>
-          <svg id="country_bar_chart" width="1200" height="600"></svg>
+          <svg id="wuhan_bar_chart" width="1200" height="600"></svg><br/>
 
-          TODO: <br/>          
-          (covid_19_data.csv - exactly same as 2019_nCoV_data.csv) - confirmed, recovered, death per continent<br/>
-          (with dataset of WVDP - correlation)<br/>
-          bubble chart of x-axis (WVDP properties), y-axis (recovery rate)<br/>
+          <h5 style="color:white; font-family:Arial;">
+            Click "Play" to view how many confirmed patients in China excluding Hubei on each day since 22/01/2020. <br/>
+            Click "Sort by Confirmed" to view confirmed patients in China excluding Hubei sorted by last recorded number (warning: only works when chart is not animating). <br/>
+            Click "Sort by Recovered" to view recovered patients in China excluding Hubei sorted by last recorded number (warning: only works when chart is not animating). <br/>
+            Click "Sort by Death" to view death patients in China excluding Hubei sorted by last recorded number (warning: only works when chart is not animating). 
+          </h5>
+
+          <button id="play-button-wuhan-no-hubei">Play</button>
+          <button id="sort-button-wuhan-no-hubei">Sort by Confirmed</button>
+          <button id="sort-recovered-button-wuhan-no-hubei">Sort by Recovered</button>
+          <button id="sort-death-button-wuhan-no-hubei">Sort by Death</button><br/>
+          <svg id="wuhan_no_hubei_bar_chart" width="1200" height="600"></svg><br/>
+
+          <h5 style="color:white; font-family:Arial;">
+            Click "Play" to view how many confirmed patients in other countries excluding China on each day since 22/01/2020. <br/>
+            Click "Sort by Confirmed" to view confirmed patients in other countries excluding China sorted by last recorded number (warning: only works when chart is not animating). <br/>
+            Click "Sort by Recovered" to view recovered patients in other countries excluding China sorted by last recorded number (warning: only works when chart is not animating). <br/>
+            Click "Sort by Death" to view death patients sorted by last recorded number (warning: only works when chart is not animating). 
+          </h5>
+
+          <button id="play-button-country">Play</button>
+          <button id="sort-button-country">Sort by Confirmed</button>
+          <button id="sort-recovered-button-country">Sort by Recovered</button>
+          <button id="sort-death-button-country">Sort by Death</button><br/>
+          <svg id="country_bar_chart" width="1200" height="600"></svg><br/>
+
         </div>
         <div class="column right-content">
         </div>
@@ -58,8 +72,5 @@
   </body>
 
   <script type="text/javascript" src="/scripts/stats.js"></script>
-  <script type="text/javascript" src="/scripts/venn.js/venn.js"></script>
-  <script type="text/javascript" src="/scripts/venn_diagram.js"></script>
-  <script type="text/javascript" src="/scripts/bubble.js"></script>
 
 </html>

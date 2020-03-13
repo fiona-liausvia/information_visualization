@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/dashboard.css" rel="stylesheet" type="text/css" media="screen" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+  </head>
+
+  <body>
+    <section class="heightviewport" id="bottom">  
+      <div class="clearfix">
+        <div class="dashboard_header_box">
+          <div class="dashboard_title">
+            COVID-19 DataViz Challenge
+          </div>
+        </div>
+        <div class="dashboard_header_box">
+          <div class="dashboard_title_right">
+            <a href="/covid">Map</a> | 
+            <a href="/covidstats">Stats</a> | 
+            <a href="/covidstats2">Stats 2</a> | 
+            <a href="/">home</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <div class="column content">
+          <h5 style="color:white; font-family:Arial;">
+            Click on each button below to explore its correlation to each country's recovery rate.
+          </h5>
+
+          <button id="health-button">Health Index</button>
+          <button id="GINI-button">GINI</button>
+          <button id="happy-idx-button">Happiness Index</button>
+          <button id="human-dev-button">Human Development Index</button>
+          <button id="SEDA-button">Sustainable Economic Development Assessment (SEDA)</button>
+          <button id="GDP-button">GDP</button>
+          <button id="education-button">Education Index</button>
+
+          <div style="padding-left:30px; padding-right:30px">
+            <svg id="legend" height="70" width="1000"></svg>
+            <svg id="bubble" height="600" width="1000"></svg>
+          </div>
+
+          <h5 style="color:white; font-family:Arial;">
+            Hover on each circle to see how many patients suffer from each symptom
+          </h5>
+
+          <div style="padding-left:30px; padding-right:30px">
+            <svg id="venn" height="900" width="1000"></svg>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </body>
+
+  <script type="text/javascript" src="/scripts/venn.js/venn.js"></script>
+  <script type="text/javascript" src="/scripts/venn_diagram.js"></script>
+  <script type="text/javascript" src="/scripts/bubble.js"></script>
+
+</html>

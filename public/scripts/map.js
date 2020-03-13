@@ -242,7 +242,9 @@ function circle_clicked() {
 		province_info = this.getAttribute("province")
 	}
 
-	d3.select("#confirmed_text").text("Confirmed")
+	d3.select("#confirmed_text")
+    .attr("fill", "red")
+    .text("Confirmed")
 	d3.select("#recovered_text").text("Recovered")
 	d3.select("#death_text").text("Deaths")
 
