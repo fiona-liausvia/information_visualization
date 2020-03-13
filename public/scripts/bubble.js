@@ -22,10 +22,10 @@ region = {}
 region["Asia"] = 0
 region["North America"] = 1
 region["Europe"] = 2
-region["Africa"] = 3
+region["Oceania"] = 3
 
 var legend_color   = d3.scale.category10();
-var legend_label = ["Asia", "North America", "Europe", "Africa"]
+var legend_label = ["Asia", "North America", "Europe", "Oceania"]
 
 d3.select("#legend")
   .append("g")

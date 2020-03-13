@@ -7,7 +7,7 @@ wuhan_bar_data            = {}
 wuhan_bar_data_no_hubei   = {}
 country_bar_data          = {}
 
-wuhan_margin              = {top: 20, right: 40, bottom: 30, left: 70},
+wuhan_margin              = {top: 55, right: 40, bottom: 30, left: 70},
 width                     = 1200 - wuhan_margin.left - wuhan_margin.right,
 height                    = 600 - wuhan_margin.top - wuhan_margin.bottom;
 
@@ -157,10 +157,29 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
               .attr("width", width + wuhan_margin.left + wuhan_margin.right)
               .attr("height", height + wuhan_margin.top + wuhan_margin.bottom)
               .append("g").attr("transform", "translate(" + wuhan_margin.left + "," + wuhan_margin.top + ")");
-      svg.append("g").attr("class", "axis_white").call(d3.axisTop(x));
+
+      svg.append("g")
+        .attr("class", "axis_white")
+        .call(d3.axisTop(x))
+        .append("text")
+          .attr("x", 100)
+          .attr("y", -50)
+          .attr("dy", "2em")
+          .style("text-anchor", "end")
+          .text("Number of Patients")
+        
+      svg.append("text")
+          .attr("id", "wuhan-date")
+          .attr("fill", "white")
+          .attr("x", 1100)
+          .attr("y", -70)
+          .attr("dy", "2em")
+          .style("text-anchor", "end")
+          .text("Date: 1/22/20")
+
       svg.append("g")
         .attr("id", "y-axis")
-        .attr("class", "axis_white")
+        .attr("class", "axis_white")        
         .call(d3.axisLeft(y));
         
       bar = svg.selectAll(".bar_confirmed").data(wuhan_bar_data[0]).enter()
@@ -189,7 +208,25 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
               .attr("width", width + wuhan_margin.left + wuhan_margin.right)
               .attr("height", height + wuhan_margin.top + wuhan_margin.bottom)
               .append("g").attr("transform", "translate(" + wuhan_margin.left + "," + wuhan_margin.top + ")");
-      svg_no_hubei.append("g").attr("class", "axis_white").call(d3.axisTop(x_no_hubei));
+      svg_no_hubei.append("g")
+        .attr("class", "axis_white")
+        .call(d3.axisTop(x_no_hubei))
+        .append("text")
+          .attr("x", 100)
+          .attr("y", -50)
+          .attr("dy", "2em")
+          .style("text-anchor", "end")
+          .text("Number of Patients")
+
+      svg_no_hubei.append("text")
+          .attr("id", "wuhan-no-hubei-date")
+          .attr("fill", "white")
+          .attr("x", 1100)
+          .attr("y", -70)
+          .attr("dy", "2em")
+          .style("text-anchor", "end")
+          .text("Date: 1/22/20")
+
       svg_no_hubei.append("g")
         .attr("id", "y-axis-nohubei")
         .attr("class", "axis_white")
@@ -255,7 +292,25 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
               .attr("width", width + wuhan_margin.left + wuhan_margin.right)
               .attr("height", height + wuhan_margin.top + wuhan_margin.bottom)
               .append("g").attr("transform", "translate(" + wuhan_margin.left + "," + wuhan_margin.top + ")");
-      svg_country.append("g").attr("class", "axis_white").call(d3.axisTop(x_country));
+      svg_country.append("g")
+        .attr("class", "axis_white")
+        .call(d3.axisTop(x_country))
+        .append("text")
+          .attr("x", 100)
+          .attr("y", -50)
+          .attr("dy", "2em")
+          .style("text-anchor", "end")
+          .text("Number of Patients")
+
+      svg_country.append("text")
+          .attr("id", "country-date")
+          .attr("fill", "white")
+          .attr("x", 1100)
+          .attr("y", -70)
+          .attr("dy", "2em")
+          .style("text-anchor", "end")
+          .text("Date: 1/22/20")
+
       svg_country.append("g")
         .attr("id", "y-country-axis")
         .attr("class", "axis_white")
@@ -342,6 +397,8 @@ function play_wuhan() {
       .attr("y", function(d) { return y(d.province) + 10; })    
       .text(function(d) { return d.confirmed; })
 
+    svg.select("#wuhan-date").text("Date: " + date_list[wuhan_bar_step])
+
     wuhan_bar_step++;
     if (wuhan_bar_step == Object.keys(wuhan_bar_data).length) t.stop();
   }, speed)
@@ -376,6 +433,8 @@ function sort_wuhan() {
     .attr("x", function(d) { return x(d.confirmed); })
     .attr("y", function(d) { return y(d.province) + 10; })    
     .text(function(d) { return d.confirmed; })
+
+  svg.select("#wuhan-date").text("Date: " + date_list[date_list.length - 1])
 }
 
 function play_wuhan_no_hubei() {
@@ -439,6 +498,8 @@ function play_wuhan_no_hubei() {
       .text(function(d) { 
         return d.deaths; 
       })
+
+    svg_no_hubei.select("#wuhan-no-hubei-date").text("Date: " + date_list[wuhan_no_hubei_bar_step])
 
     wuhan_no_hubei_bar_step++;
     if (wuhan_no_hubei_bar_step == 30) t.stop();
@@ -512,6 +573,9 @@ function sort_wuhan_no_hubei() {
     .text(function(d) { 
       return d.deaths; 
     })
+
+  svg_no_hubei.select("#wuhan-no-hubei-date").text("Date: " + date_list[date_list.length - 1])
+
 }
 
 function sort_recovered_wuhan_no_hubei() {
@@ -581,6 +645,9 @@ function sort_recovered_wuhan_no_hubei() {
     .text(function(d) { 
       return d.deaths; 
     })
+
+  svg_no_hubei.select("#wuhan-no-hubei-date").text("Date: " + date_list[date_list.length - 1])
+
 }
 
 function sort_death_wuhan_no_hubei() {
@@ -655,6 +722,9 @@ function sort_death_wuhan_no_hubei() {
     .text(function(d) { 
       return d.deaths; 
     })
+
+  svg_no_hubei.select("#wuhan-no-hubei-date").text("Date: " + date_list[date_list.length - 1])
+
 }
 
 function find_country_data_idx(country, dt) {
@@ -727,6 +797,8 @@ function play_country() {
         return d.deaths; 
       })
 
+    svg_country.select("#country-date").text("Date: " + date_list[wuhan_bar_step])
+
     wuhan_bar_step++;
     if (wuhan_bar_step == Object.keys(country_bar_data).length) t.stop();
   }, speed)
@@ -795,6 +867,8 @@ function sort_country() {
     .text(function(d) { 
       return d.deaths; 
     })
+
+  svg_country.select("#country-date").text("Date: " + date_list[date_list.length - 1])
 }
 
 function sort_recovered_country() {
@@ -860,6 +934,8 @@ function sort_recovered_country() {
     .text(function(d) { 
       return d.deaths; 
     })
+
+  svg_country.select("#country-date").text("Date: " + date_list[date_list.length - 1])
 }
 
 function sort_death_country() {
@@ -930,6 +1006,9 @@ function sort_death_country() {
     .text(function(d) { 
       return d.deaths; 
     })
+
+  svg_country.select("#country-date").text("Date: " + date_list[date_list.length - 1])
+
 }
 
 /*
