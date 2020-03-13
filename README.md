@@ -8,18 +8,18 @@ To run the server:
 3. If run successfully, it will print 'Listening on 5000'
 4. Open your browser and type 'http://127.0.0.1:5000/covid' 
 
-The codes which are mainly used for this section are in the following folder:\
-|_____public \
-   |_____data\
-      |____covid+ 			(location of all datasets used for this challenge)\
-   |_____scripts			(location of all javascripts used for this challenge)
-   |_____stylesheets		(location of all css files used for this challenge)
-|_____views
-   |_____pages
-      |____v6.ejs 			(location of vis#1 for this challenge)
-      |____v7.ejs 			(location of vis#2, #3, #4 for this challenge)
-      |____v8.ejs 			(location of vis#5, #6 for this challenge)
-|_____index.js
+The codes which are mainly used for this section are in the following folder:  
+|_____public  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_____data  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_____covid (location of all datasets used for this challenge)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_____scripts (location of all javascripts used for this challenge)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_____stylesheets (location of all css files used for this challenge)    
+|____views  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|____pages  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|____v6.ejs (location of vis#1 for this challenge)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|____v7.ejs (location of vis#2, #3, #4 for this challenge)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|____v8.ejs (location of vis#5, #6 for this challenge)  
+|____index.js  
 
 ## OTOT-Task-F
 
