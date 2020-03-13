@@ -8,10 +8,10 @@ To run the server:
 3. If run successfully, it will print 'Listening on 5000'
 4. Open your browser and type 'http://127.0.0.1:5000/covid' 
 
-The codes which are mainly used for this section are in the following folder:
-|_____public 
-   |_____data
-      |____covid 			(location of all datasets used for this challenge)
+The codes which are mainly used for this section are in the following folder:\
+|_____public \
+   |_____data\
+      |____covid+ 			(location of all datasets used for this challenge)\
    |_____scripts			(location of all javascripts used for this challenge)
    |_____stylesheets		(location of all css files used for this challenge)
 |_____views
