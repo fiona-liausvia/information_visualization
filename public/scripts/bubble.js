@@ -105,6 +105,15 @@ function onclick_education() {
   reload(y_index)
 }
 
+pretty_text = {}
+pretty_text["health_exp"] = "Health Expenditure"
+pretty_text["GINI"] = "GINI Index"
+pretty_text["happy_idx"] = "World Happiness Index"
+pretty_text["human_dev_idx"] = "Human Development Index"
+pretty_text["SEDA"] = "SEDA"
+pretty_text["GDP"] = "GDP"
+pretty_text["educ_exp"] = "Education Expenditure"
+
 function reload(y_index) {
   d3.json("data/covid/correlation_data.json", function(error, d) {
     data = []
@@ -136,7 +145,7 @@ function reload(y_index) {
       })    
     }
 
-    var labelX = y_index;
+    var labelX = pretty_text[y_index];
     var labelY = "Recovery Rate";
 
     y         = d3.scaleLinear().range([0, height - margin - margin]).domain([min_y, max_y]);
