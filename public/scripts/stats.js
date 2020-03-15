@@ -7,7 +7,7 @@ wuhan_bar_data            = {}
 wuhan_bar_data_no_hubei   = {}
 country_bar_data          = {}
 
-wuhan_margin              = {top: 55, right: 40, bottom: 30, left: 70},
+wuhan_margin              = {top: 80, right: 40, bottom: 30, left: 70},
 width                     = 1200 - wuhan_margin.left - wuhan_margin.right,
 height                    = 600 - wuhan_margin.top - wuhan_margin.bottom;
 
@@ -30,6 +30,9 @@ play_button_country           = d3.select("#play-button-country")
 sort_button_country           = d3.select("#sort-button-country")
 sort_recovered_button_country = d3.select("#sort-recovered-button-country")
 sort_death_button_country     = d3.select("#sort-death-button-country")
+
+var legend_color    = ["#B34742", "#30E9FF", "#BD00A9"]
+var legend_label    = ["Confirmed", "Recovered", "Death"]
 
 var infected_data   = {}
 var recovered_data  = {}
@@ -151,6 +154,28 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
       provinces[12] = temp
 
       // Wuhan 
+      d3.select("#wuhan_bar_chart")
+        .append("g")
+        .attr("id", "rectangles")
+
+      for (var i = 0; i < 1; i++) {
+        d3.select("#rectangles")
+          .append("rect")
+          .attr("height", 20)
+          .attr("width", 20)
+          .attr("x", 120 * i + 70)
+          .attr("y", 10)
+          .attr("fill", legend_color[i])
+        d3.select("#rectangles")
+          .append("text")
+          .attr("x", 120 * i + 90)
+          .attr("y", 20)
+          .attr("dy", ".35em")
+          .attr("font-size", "13px")
+          .attr("fill", "white")
+          .text(legend_label[i])
+      }
+
       y       = d3.scaleBand().padding(0.2).domain(provinces).range([0, height]);
       x       = d3.scaleLinear().range([0, width]).domain([0, 65000]);
       svg     = d3.select("#wuhan_bar_chart").append("svg")
@@ -202,6 +227,28 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
       sort_button_wuhan.on("click", sort_wuhan)  
 
       // Wuhan - Without Hubei
+      d3.select("#wuhan_no_hubei_bar_chart")
+        .append("g")
+        .attr("id", "rectangles_no_hubei")
+
+      for (var i = 0; i < 3; i++) {
+        d3.select("#rectangles_no_hubei")
+          .append("rect")
+          .attr("height", 20)
+          .attr("width", 20)
+          .attr("x", 120 * i + 70)
+          .attr("y", 10)
+          .attr("fill", legend_color[i])
+        d3.select("#rectangles_no_hubei")
+          .append("text")
+          .attr("x", 120 * i + 90)
+          .attr("y", 20)
+          .attr("dy", ".35em")
+          .attr("font-size", "13px")
+          .attr("fill", "white")
+          .text(legend_label[i])
+      }
+
       y_no_hubei       = d3.scaleBand().padding(0.2).domain(provinces_no_hubei).range([0, height]);
       x_no_hubei       = d3.scaleLinear().range([0, width]).domain([0, 1500]);
       svg_no_hubei     = d3.select("#wuhan_no_hubei_bar_chart").append("svg")
@@ -286,6 +333,28 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
       sort_death_button_wuhan_no_hubei.on("click", sort_death_wuhan_no_hubei)  
 
       // Country
+      d3.select("#country_bar_chart")
+        .append("g")
+        .attr("id", "rectangles_country")
+
+      for (var i = 0; i < 3; i++) {
+        d3.select("#rectangles_country")
+          .append("rect")
+          .attr("height", 20)
+          .attr("width", 20)
+          .attr("x", 120 * i + 70)
+          .attr("y", 10)
+          .attr("fill", legend_color[i])
+        d3.select("#rectangles_country")
+          .append("text")
+          .attr("x", 120 * i + 90)
+          .attr("y", 20)
+          .attr("dy", ".35em")
+          .attr("font-size", "13px")
+          .attr("fill", "white")
+          .text(legend_label[i])
+      }
+
       y_country       = d3.scaleBand().padding(0.2).domain(countries).range([0, height]);
       x_country       = d3.scaleLinear().range([0, width]).domain([0, 110]);
       svg_country     = d3.select("#country_bar_chart").append("svg")
