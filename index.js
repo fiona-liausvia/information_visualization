@@ -23,6 +23,9 @@ express()
   .get('/covid', (req, res) => res.render('pages/v6'))
   .get('/covidstats', (req, res) => res.render('pages/v7'))
   .get('/covidstats2', (req, res) => res.render('pages/v8'))
+  .get('/bar', (req, res) => res.render('pages/bar'))
+  .get('/bar2', (req, res) => res.render('pages/bar2'))
+  .get('/bar3', (req, res) => res.render('pages/bar3'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
