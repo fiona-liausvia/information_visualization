@@ -26,6 +26,11 @@ express()
   .get('/bar', (req, res) => res.render('pages/bar'))
   .get('/bar2', (req, res) => res.render('pages/bar2'))
   .get('/bar3', (req, res) => res.render('pages/bar3'))
+  .get('/bargroup', (req, res) => res.render('pages/bargroup'))
+  .get('/scatterplot', (req, res) => res.render('pages/scatterplot'))  
+  .get('/linegraph', (req, res) => res.render('pages/linegraph'))  
+  .get('/piechart', (req, res) => res.render('pages/piechart'))  
+  .get('/bargroup_practice', (req, res) => res.render('pages/bargroup_practice'))  
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
