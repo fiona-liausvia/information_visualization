@@ -23,7 +23,7 @@ express()
   .get('/covid', (req, res) => res.render('pages/v6'))
   .get('/covidstats', (req, res) => res.render('pages/v7'))
   .get('/covidstats2', (req, res) => res.render('pages/v8'))
-  .get('/bar', (req, res) => res.render('pages/bar'))
+/*  .get('/bar', (req, res) => res.render('pages/bar'))
   .get('/bar2', (req, res) => res.render('pages/bar2'))
   .get('/bar3', (req, res) => res.render('pages/bar3'))
   .get('/bargroup', (req, res) => res.render('pages/bargroup'))
@@ -31,10 +31,25 @@ express()
   .get('/linegraph', (req, res) => res.render('pages/linegraph'))  
   .get('/piechart', (req, res) => res.render('pages/piechart'))  
   .get('/bargroup_practice', (req, res) => res.render('pages/bargroup_practice'))  
+  .get('/worldmap', (req, res) => res.render('pages/worldmap'))  */
+
+  .get('/template_worldmap', (req, res) => res.render('exam/template_worldmap')) 
+  .get('/template_piechart', (req, res) => res.render('exam/template_piechart')) 
+  .get('/template_bar', (req, res) => res.render('exam/template_bar')) 
+  .get('/template_bargroup', (req, res) => res.render('exam/template_bargroup')) 
+  .get('/template_barstack', (req, res) => res.render('exam/template_barstack')) 
+  .get('/template_linegraph', (req, res) => res.render('exam/template_linegraph')) 
+  .get('/template_scatterplot', (req, res) => res.render('exam/template_scatterplot')) 
+  .get('/template_heatmap', (req, res) => res.render('exam/template_heatmap')) 
+  .get('/template_corrmatrix', (req, res) => res.render('exam/template_corrmatrix')) 
+  .get('/template_bubblechart', (req, res) => res.render('exam/template_bubblechart')) 
+  .get('/template_forcegraph', (req, res) => res.render('exam/template_forcegraph')) 
+  .get('/template_barhorizontal', (req, res) => res.render('exam/template_barhorizontal')) 
+
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
-function get_days_diff(date1, date2) {
+/*function get_days_diff(date1, date2) {
   // Jan 19 2020 to Feb 27 2020
   var Difference_In_Time = date2.getTime() - date1.getTime();     
   var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
@@ -167,4 +182,4 @@ for (var i = 0; i < filter_country.length; i++) {
 
 var correlation_data_json = JSON.stringify(output_json);
 fs.writeFileSync('public/data/covid/correlation_data.json', correlation_data_json);
-
+*/
