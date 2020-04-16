@@ -148,7 +148,7 @@ d3.csv("data/exam/DATASET-3.csv", function(error, d) {
 
     infected_data[j].push({
       "lat": "37.0902",
-      "lng": "95.7129",
+      "lng": "-95.7129",
       "r": get_radius(d[j]["US"]),
       "size": d[j]["US"],
       "id": j + "_1",
