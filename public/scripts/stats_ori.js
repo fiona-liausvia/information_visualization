@@ -1,84 +1,4 @@
-var date_list       = ["2020-01-22",
-"2020-01-23",
-"2020-01-24",
-"2020-01-25",
-"2020-01-26",
-"2020-01-27",
-"2020-01-28",
-"2020-01-29",
-"2020-01-30",
-"2020-01-31",
-"2020-02-01",
-"2020-02-02",
-"2020-02-03",
-"2020-02-04",
-"2020-02-05",
-"2020-02-06",
-"2020-02-07",
-"2020-02-08",
-"2020-02-09",
-"2020-02-10",
-"2020-02-11",
-"2020-02-12",
-"2020-02-13",
-"2020-02-14",
-"2020-02-15",
-"2020-02-16",
-"2020-02-17",
-"2020-02-18",
-"2020-02-19",
-"2020-02-20",
-"2020-02-21",
-"2020-02-22",
-"2020-02-23",
-"2020-02-24",
-"2020-02-25",
-"2020-02-26",
-"2020-02-27",
-"2020-02-28",
-"2020-02-29",
-"2020-03-01",
-"2020-03-02",
-"2020-03-03",
-"2020-03-04",
-"2020-03-05",
-"2020-03-06",
-"2020-03-07",
-"2020-03-08",
-"2020-03-09",
-"2020-03-10",
-"2020-03-11",
-"2020-03-12",
-"2020-03-13",
-"2020-03-14",
-"2020-03-15",
-"2020-03-16",
-"2020-03-17",
-"2020-03-18",
-"2020-03-19",
-"2020-03-20",
-"2020-03-21",
-"2020-03-22",
-"2020-03-23",
-"2020-03-24",
-"2020-03-25",
-"2020-03-26",
-"2020-03-27",
-"2020-03-28",
-"2020-03-29",
-"2020-03-30",
-"2020-03-31",
-"2020-04-01",
-"2020-04-02",
-"2020-04-03",
-"2020-04-04",
-"2020-04-05",
-"2020-04-06",
-"2020-04-07",
-"2020-04-08",
-"2020-04-09",
-"2020-04-10"
-]
+var date_list       = ["1/22/20", "1/23/20", "1/24/20", "1/25/20",  "1/26/20", "1/27/20", "1/28/20", "1/29/20", "1/30/20", "1/31/20", "2/1/20", "2/2/20", "2/3/20", "2/4/20", "2/5/20", "2/6/20", "2/7/20", "2/8/20", "2/9/20", "2/10/20", "2/11/20", "2/12/20", "2/13/20", "2/14/20", "2/15/20", "2/16/20", "2/17/20", "2/18/20", "2/19/20", "2/20/20"]                                                      
 continents                = {}
 provinces                 = []
 provinces_no_hubei        = []
@@ -121,96 +41,17 @@ var deaths_data     = {}
 speed = 200
 
 // Data Preprocessing
-var infected_data   = {}
-d3.csv("data/exam/DATASET-3.csv", function(error, d) {  
-
-  console.log(d)
-
-  for (var j = 0; j < d.length; j++) {
+d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {  
+  for (var j=0; j < date_list.length; j++) {
     infected_data[j] = []
-    infected_data[j].push({
-      "lat": "35.8617",
-      "lng": "104.1954",
-      "size": d[j]["China"],
-      "id": j + "_0",
-      "country": "China",
-      "province": "China",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "37.0902",
-      "lng": "95.7129",
-      "size": d[j]["US"],
-      "id": j + "_1",
-      "country": "US",
-      "province": "US",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "55.3781",
-      "lng": "3.4360",
-      "size": d[j]["United_Kingdom"],
-      "id": j + "_2",
-      "country": "United_Kingdom",
-      "province": "United_Kingdom",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "41.8719",
-      "lng": "12.5674",
-      "size": d[j]["Italy"],
-      "id": j + "_3",
-      "country": "Italy",
-      "province": "Italy",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "46.2276",
-      "lng": "2.2137",
-      "size": d[j]["France"],
-      "id": j + "_4",
-      "country": "France",
-      "province": "France",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "51.1657",
-      "lng": "10.4515",
-      "size": d[j]["Germany"],
-      "id": j + "_5",
-      "country": "Germany",
-      "province": "Germany",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "40.4637",
-      "lng": "3.7492",
-      "size": d[j]["Spain"],
-      "id": j + "_6",
-      "country": "Spain",
-      "province": "Spain",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "32.4279",
-      "lng": "53.6880",
-      "size": d[j]["Iran"],
-      "id": j + "_7",
-      "country": "Iran",
-      "province": "Iran",       
-      "date": d[j].Date
-    })
+    for (var i=0; i < d.length; i++) {
+      infected_data[j].push({
+        "size": d[i][date_list[j]],
+        "country": d[i]["Country/Region"],
+        "province": d[i]["Province/State"]
+      }) 
+    }
   }
-
-  console.log("final")
-  console.log(infected_data)
 
   d3.csv("data/covid/time_series_covid_19_recovered.csv", function(error, dd) {  
     for (var j=0; j < date_list.length; j++) {
@@ -492,7 +333,7 @@ d3.csv("data/exam/DATASET-3.csv", function(error, d) {
       sort_death_button_wuhan_no_hubei.on("click", sort_death_wuhan_no_hubei)  
 
       // Country
-/*      d3.select("#country_bar_chart")
+      d3.select("#country_bar_chart")
         .append("g")
         .attr("id", "rectangles_country")
 
@@ -512,10 +353,10 @@ d3.csv("data/exam/DATASET-3.csv", function(error, d) {
           .attr("font-size", "13px")
           .attr("fill", "white")
           .text(legend_label[i])
-      }*/
+      }
 
       y_country       = d3.scaleBand().padding(0.2).domain(countries).range([0, height]);
-      x_country       = d3.scaleLinear().range([0, width]).domain([0, 500000]);
+      x_country       = d3.scaleLinear().range([0, width]).domain([0, 110]);
       svg_country     = d3.select("#country_bar_chart").append("svg")
               .attr("width", width + wuhan_margin.left + wuhan_margin.right)
               .attr("height", height + wuhan_margin.top + wuhan_margin.bottom)

@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/dashboard.css" rel="stylesheet" type="text/css" media="screen" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+  </head>
+
+  <body>
+    <section class="heightviewport" id="top">  
+      <div class="clearfix">
+        <div class="dashboard_header_box">
+          <div class="dashboard_title">
+            Exam Visualization           
+          </div>
+        </div>
+        <div class="dashboard_header_box">
+          <div class="dashboard_title_right">
+            <a href="/vis1exam">Vis 1</a> | 
+            <a href="/vis2exam">Vis 2</a> 
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <!--
+        <div class="column menu" id="sidebar">
+          <p>Singapore</p>
+        </div>
+        -->
+        <div class="column content-map" id="main">
+          <h5 style="color:white; font-family:Arial;">
+            Click play to see how different parts of the world are getting affected by the virus. <br/>
+            Click on each circle to see how many COVID cases in each region.
+          </h5>
+
+          <button id="play-button">Play</button><br/>
+          <svg width="800" height="50" id="slider_svg"></svg>
+          <div id="map">
+            <svg width="980" height="450" id="map_svg"></svg>           
+          </div>
+        </div>
+        <div class="column right-content">
+          <br/><br/><br/>
+          <div id="info_map">
+            <p id="date_map"></p>
+            <p id="country_map"></p>
+<!--            <p id="province_map"></p>-->
+            <h4 style="color:red" id="confirmed_text"></h4> 
+            <p id="confirmed_map"></p>
+<!--             <h4 style="color:green" id="recovered_text"></h4> 
+            <p id="recovered_map"></p>
+            <h4 style="color:grey" id="death_text"></h4> 
+            <p id="deaths_map"></p> -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+  <script type="text/javascript" src="/scripts/map.js"></script>
+
+</html>

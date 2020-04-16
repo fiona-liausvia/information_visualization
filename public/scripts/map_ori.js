@@ -10,100 +10,17 @@ var slider_prev_target 		= 0;
 var slider_alpha          = 0.2;
 var slider_step_timer;
 var slider_moving         = true;
-var slider_max_val       	= 80;
+var slider_max_val       	= 30;
 var slider_trail_length   = 5;
 var slider_timer  				= d3.timer(updateTween);
 var slider_x 							= d3.scaleLinear().domain([0, slider_max_val]).range([0, slider_width]).clamp(true); 
 var slider_date 					= new Date(2020, 0, 22); //COVID19_open_line_list 
 
 // DATA
-var date_list 			= ["2020-01-22",
-"2020-01-23",
-"2020-01-24",
-"2020-01-25",
-"2020-01-26",
-"2020-01-27",
-"2020-01-28",
-"2020-01-29",
-"2020-01-30",
-"2020-01-31",
-"2020-02-01",
-"2020-02-02",
-"2020-02-03",
-"2020-02-04",
-"2020-02-05",
-"2020-02-06",
-"2020-02-07",
-"2020-02-08",
-"2020-02-09",
-"2020-02-10",
-"2020-02-11",
-"2020-02-12",
-"2020-02-13",
-"2020-02-14",
-"2020-02-15",
-"2020-02-16",
-"2020-02-17",
-"2020-02-18",
-"2020-02-19",
-"2020-02-20",
-"2020-02-21",
-"2020-02-22",
-"2020-02-23",
-"2020-02-24",
-"2020-02-25",
-"2020-02-26",
-"2020-02-27",
-"2020-02-28",
-"2020-02-29",
-"2020-03-01",
-"2020-03-02",
-"2020-03-03",
-"2020-03-04",
-"2020-03-05",
-"2020-03-06",
-"2020-03-07",
-"2020-03-08",
-"2020-03-09",
-"2020-03-10",
-"2020-03-11",
-"2020-03-12",
-"2020-03-13",
-"2020-03-14",
-"2020-03-15",
-"2020-03-16",
-"2020-03-17",
-"2020-03-18",
-"2020-03-19",
-"2020-03-20",
-"2020-03-21",
-"2020-03-22",
-"2020-03-23",
-"2020-03-24",
-"2020-03-25",
-"2020-03-26",
-"2020-03-27",
-"2020-03-28",
-"2020-03-29",
-"2020-03-30",
-"2020-03-31",
-"2020-04-01",
-"2020-04-02",
-"2020-04-03",
-"2020-04-04",
-"2020-04-05",
-"2020-04-06",
-"2020-04-07",
-"2020-04-08",
-"2020-04-09",
-"2020-04-10"
-]
+var date_list 			= ["1/22/20", "1/23/20", "1/24/20", "1/25/20",	"1/26/20", "1/27/20", "1/28/20", "1/29/20", "1/30/20", "1/31/20", "2/1/20", "2/2/20", "2/3/20", "2/4/20", "2/5/20", "2/6/20", "2/7/20", "2/8/20", "2/9/20", "2/10/20", "2/11/20", "2/12/20", "2/13/20", "2/14/20", "2/15/20", "2/16/20", "2/17/20", "2/18/20", "2/19/20", "2/20/20"]
 var map_circle 			= []	
-/*var infected_data 	= {}
+var infected_data 	= {}
 d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {	
-
-//  console.log(d)
-
 	for (var j=0; j < date_list.length; j++) {
 		infected_data[j] = []
 		for (var i=0; i < d.length; i++) {
@@ -117,120 +34,11 @@ d3.csv("data/covid/time_series_covid_19_confirmed.csv", function(error, d) {
 				"province": d[i]["Province/State"],				
 				"date": date_list[j]
 			}) 
-		}    
+		}
 	}
-
-  console.log("infected_data")
-  console.log(infected_data)
-  data = [
-      [{lat:, lng:, r:, size:, id:, country:, date: }]
-  ]
-  
-});
-*/
-var infected_data   = {}
-d3.csv("data/exam/DATASET-3.csv", function(error, d) {  
-
-  console.log(d)
-
-  for (var j = 0; j < d.length; j++) {
-    infected_data[j] = []
-    infected_data[j].push({
-      "lat": "35.8617",
-      "lng": "104.1954",
-      "r": get_radius(d[j]["China"]),
-      "size": d[j]["China"],
-      "id": j + "_0",
-      "country": "China",
-      "province": "China",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "37.0902",
-      "lng": "95.7129",
-      "r": get_radius(d[j]["US"]),
-      "size": d[j]["US"],
-      "id": j + "_1",
-      "country": "US",
-      "province": "US",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "55.3781",
-      "lng": "3.4360",
-      "r": get_radius(d[j]["United_Kingdom"]),
-      "size": d[j]["United_Kingdom"],
-      "id": j + "_2",
-      "country": "United_Kingdom",
-      "province": "United_Kingdom",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "41.8719",
-      "lng": "12.5674",
-      "r": get_radius(d[j]["Italy"]),
-      "size": d[j]["Italy"],
-      "id": j + "_3",
-      "country": "Italy",
-      "province": "Italy",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "46.2276",
-      "lng": "2.2137",
-      "r": get_radius(d[j]["France"]),
-      "size": d[j]["France"],
-      "id": j + "_4",
-      "country": "France",
-      "province": "France",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "51.1657",
-      "lng": "10.4515",
-      "r": get_radius(d[j]["Germany"]),
-      "size": d[j]["Germany"],
-      "id": j + "_5",
-      "country": "Germany",
-      "province": "Germany",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "40.4637",
-      "lng": "3.7492",
-      "r": get_radius(d[j]["Spain"]),
-      "size": d[j]["Spain"],
-      "id": j + "_6",
-      "country": "Spain",
-      "province": "Spain",       
-      "date": d[j].Date
-    })
-
-    infected_data[j].push({
-      "lat": "32.4279",
-      "lng": "53.6880",
-      "r": get_radius(d[j]["Iran"]),
-      "size": d[j]["Iran"],
-      "id": j + "_7",
-      "country": "Iran",
-      "province": "Iran",       
-      "date": d[j].Date
-    })
-  }
-
-  console.log("final")
-  console.log(infected_data)
-
 });
 
-
-/*var recovered_data 	= {}
+var recovered_data 	= {}
 d3.csv("data/covid/time_series_covid_19_recovered.csv", function(error, d) {	
 	for (var j=0; j < date_list.length; j++) {
 		recovered_data[j] = []
@@ -261,7 +69,7 @@ d3.csv("data/covid/time_series_covid_19_deaths.csv", function(error, d) {
 		}
 	}
 });
-*/
+
 // MAP SLIDER
 var slider 						= slider_svg.append("g")
   .attr("class", "slider")
@@ -426,7 +234,7 @@ function step() {
 function circle_clicked() {
 	id 					= this.id.split("_")
 	day_idx 		= id[0]
-	country_idx = id[1]  
+	country_idx = id[1]
 
 	country_info = this.getAttribute("country")
 	province_info = ""
@@ -444,7 +252,7 @@ function circle_clicked() {
 	d3.select("#country_map").text(country_info)
 	d3.select("#province_map").text(province_info)
 	d3.select("#confirmed_map").text(infected_data[day_idx][country_idx].size)
-/*	d3.select("#recovered_map").text(recovered_data[day_idx][country_idx].size)
+	d3.select("#recovered_map").text(recovered_data[day_idx][country_idx].size)
 	d3.select("#deaths_map").text(deaths_data[day_idx][country_idx].size)
-*/
+
 }

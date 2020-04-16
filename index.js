@@ -46,6 +46,9 @@ express()
   .get('/template_forcegraph', (req, res) => res.render('exam/template_forcegraph')) 
   .get('/template_barhorizontal', (req, res) => res.render('exam/template_barhorizontal')) 
 
+  .get('/vis1exam', (req, res) => res.render('exam/vis1exam')) 
+  .get('/vis2exam', (req, res) => res.render('exam/vis2exam')) 
+
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
