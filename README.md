@@ -6,7 +6,7 @@ The same code is published at 'http://fiona-liausvia.herokuapp.com/vis1exam'
 
 To run the server:
 1. Clone the source codes   
-2. Run 'node index.js' in your command prompt
+2. Run 'node index.js' in your command prompt (ensure that you have all necessary NPM modules installed)
 3. If run successfully, it will print 'Listening on 5000'
 4. Open your browser and type 'http://127.0.0.1:5000/vis1exam' 
 
@@ -27,7 +27,7 @@ The codes which are mainly used for this section are in the following folder:
 
 To run the server:
 1. Clone the source codes   
-2. Run 'node index.js' in your command prompt
+2. Run 'node index.js' in your command prompt (ensure that you have all necessary NPM modules installed)
 3. If run successfully, it will print 'Listening on 5000'
 4. Open your browser and type 'http://127.0.0.1:5000/covid' 
 
@@ -48,7 +48,7 @@ The codes which are mainly used for this section are in the following folder:
 
 To run the server:
 1. Clone the source codes   
-2. Run 'node index.js' in your command prompt
+2. Run 'node index.js' in your command prompt (ensure that you have all necessary NPM modules installed)
 3. If run successfully, it will print 'Listening on 5000'
 4. Open your browser and type 'http://127.0.0.1:5000/' 
 
